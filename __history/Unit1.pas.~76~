@@ -1,0 +1,105 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls;
+
+type
+  TForm1 = class(TForm)
+    PaintBox1: TPaintBox;
+    Timer1: TTimer;
+    Button1: TButton;
+    Button2: TButton;
+    procedure PaintBox1Paint(Sender: TObject);
+    procedure PaintBox1MouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure PaintBox1MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure PaintBox1MouseMove(Sender: TObject; Shift: TShiftState;
+      X, Y: Integer);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+  MX, MY, PMX, PMY: Integer;
+  MyColor: TColor;
+  Size: Integer = 8;
+  MClick: Boolean;
+  Bitmap: TBitmap;
+  Dest: TRect;
+
+implementation
+
+{$R *.dfm}
+
+
+procedure TForm1.Button1Click(Sender: TObject);
+var
+  Source: TRect;
+begin
+  Bitmap := TBitmap.Create;
+  Bitmap.Width := PaintBox1.Width;
+  Bitmap.Height := PaintBox1.Height;
+  Dest := Rect(0, 0, Bitmap.Width, Bitmap.Height);
+  Source := Rect(0, 0, PaintBox1.Width, PaintBox1.Height);
+  Bitmap.Canvas.CopyRect(Dest, PaintBox1.Canvas, Source);
+  PaintBox1.Enabled := False;
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+begin
+  PaintBox1.Enabled := False;
+  Dest := Rect(0, 0, Bitmap.Width, Bitmap.Height);
+  PaintBox1.Canvas.CopyRect(Dest, Bitmap.Canvas, Dest);
+end;
+
+procedure TForm1.PaintBox1MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  MClick := true;
+
+  PaintBox1.Canvas.Pen.Color := clRed;
+  PaintBox1.Canvas.Brush.Color := clRed;
+  PaintBox1.Canvas.Pen.Width := Size;
+  PaintBox1.Canvas.PolyLine([Point(X, Y), Point(X, Y)]);
+
+end;
+
+procedure TForm1.PaintBox1MouseMove(Sender: TObject; Shift: TShiftState;
+  X, Y: Integer);
+begin
+  PMX := MX;
+  PMY := MY;
+  MX := X;
+  MY := Y;
+
+  if MClick then
+  begin
+    PaintBox1.Canvas.Pen.Color := clRed;
+    PaintBox1.Canvas.Brush.Color := clRed;
+    PaintBox1.Canvas.Pen.Width := Size;
+    PaintBox1.Canvas.PolyLine([Point(PMX, PMY), Point(MX, MY)]);
+  end;
+end;
+
+procedure TForm1.PaintBox1MouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  MClick := false;
+end;
+
+procedure TForm1.PaintBox1Paint(Sender: TObject);
+begin
+  // PaintBox1;
+end;
+
+end.
