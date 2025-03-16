@@ -1,4 +1,4 @@
-unit Unit1;
+﻿unit Unit1;
 
 interface
 
@@ -13,7 +13,6 @@ type
     Timer1: TTimer;
     Button1: TButton;
     Button2: TButton;
-    procedure PaintBox1Paint(Sender: TObject);
     procedure PaintBox1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure PaintBox1MouseDown(Sender: TObject; Button: TMouseButton;
@@ -22,6 +21,8 @@ type
       X, Y: Integer);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure PaintBox1Paint(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -35,30 +36,42 @@ var
   Size: Integer = 8;
   MClick: Boolean;
   Bitmap: TBitmap;
-  Dest: TRect;
+  BitmapE: TBitmap;
+  Dest, Source: TRect;
 
 implementation
 
 {$R *.dfm}
 
+procedure LoadPaint;
+begin
+   Form1.PaintBox1.Canvas.Draw(0, 0, Bitmap);
+end;
+
 
 procedure TForm1.Button1Click(Sender: TObject);
-var
-  Source: TRect;
 begin
-  Bitmap := TBitmap.Create;
-  Bitmap.Width := PaintBox1.Width;
-  Bitmap.Height := PaintBox1.Height;
-  Dest := Rect(0, 0, Bitmap.Width, Bitmap.Height);
+  BitmapE := TBitmap.Create;
+  BitmapE.Width := PaintBox1.Width;
+  BitmapE.Height := PaintBox1.Height;
+  Dest := Rect(0, 0, BitmapE.Width, BitmapE.Height);
   Source := Rect(0, 0, PaintBox1.Width, PaintBox1.Height);
-  Bitmap.Canvas.CopyRect(Dest, PaintBox1.Canvas, Source);
+  BitmapE.Canvas.CopyRect(Dest, PaintBox1.Canvas, Source);
 end;
 
 procedure TForm1.Button2Click(Sender: TObject);
 begin
-  PaintBox1.Enabled := False;
   Dest := Rect(0, 0, Bitmap.Width, Bitmap.Height);
   PaintBox1.Canvas.CopyRect(Dest, Bitmap.Canvas, Dest);
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  Bitmap := TBitmap.Create;
+  Bitmap.SetSize(PaintBox1.Width, PaintBox1.Height);
+  Bitmap.Canvas.Brush.Color := clWhite;
+  Bitmap.Canvas.FillRect(Rect(0, 0, Bitmap.Width, Bitmap.Height));
+
 end;
 
 procedure TForm1.PaintBox1MouseDown(Sender: TObject; Button: TMouseButton;
@@ -66,10 +79,10 @@ procedure TForm1.PaintBox1MouseDown(Sender: TObject; Button: TMouseButton;
 begin
   MClick := true;
 
-  PaintBox1.Canvas.Pen.Color := clRed;
-  PaintBox1.Canvas.Brush.Color := clRed;
-  PaintBox1.Canvas.Pen.Width := Size;
-  PaintBox1.Canvas.PolyLine([Point(X, Y), Point(X, Y)]);
+  Bitmap.Canvas.Pen.Color := clRed;
+  Bitmap.Canvas.Brush.Color := clRed;
+  Bitmap.Canvas.Pen.Width := Size;
+  Bitmap.Canvas.PolyLine([Point(X, Y), Point(X, Y)]);
 
 end;
 
@@ -83,22 +96,37 @@ begin
 
   if MClick then
   begin
-    PaintBox1.Canvas.Pen.Color := clRed;
-    PaintBox1.Canvas.Brush.Color := clRed;
-    PaintBox1.Canvas.Pen.Width := Size;
-    PaintBox1.Canvas.PolyLine([Point(PMX, PMY), Point(MX, MY)]);
+    Bitmap.Canvas.Pen.Color := clRed;
+    Bitmap.Canvas.Brush.Color := clRed;
+    Bitmap.Canvas.Pen.Width := Size;
+    Bitmap.Canvas.PolyLine([Point(PMX, PMY), Point(MX, MY)]);
   end;
+
+  LoadPaint;
+
 end;
 
 procedure TForm1.PaintBox1MouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
   MClick := false;
+
+  Bitmap := TBitmap.Create;
+  Bitmap.Width := PaintBox1.Width;
+  Bitmap.Height := PaintBox1.Height;
+  Dest := Rect(0, 0, Bitmap.Width, Bitmap.Height);
+  Source := Rect(0, 0, PaintBox1.Width, PaintBox1.Height);
+  Bitmap.Canvas.CopyRect(Dest, PaintBox1.Canvas, Source);
+
+
 end;
 
 procedure TForm1.PaintBox1Paint(Sender: TObject);
 begin
-  // PaintBox1;
+
+
+  LoadPaint;
+
 end;
 
 end.
