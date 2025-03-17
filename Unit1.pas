@@ -41,11 +41,15 @@ var
 
 implementation
 
+uses PointConverter;
+
 {$R *.dfm}
 
 procedure LoadPaint;
 begin
    Form1.PaintBox1.Canvas.Draw(0, 0, Bitmap);
+
+     PointConverter.SetFieldRect(Rect(0, 0, Form1.ClientWidth, Form1.ClientHeight));
 end;
 
 

@@ -69,8 +69,8 @@ procedure TForm1.FormCreate(Sender: TObject);
 begin
   Bitmap := TBitmap.Create;
   Bitmap.SetSize(PaintBox1.Width, PaintBox1.Height);
-  Bitmap.Canvas.Brush.Color := clWhite;
-  Bitmap.Canvas.FillRect(Rect(0, 0, Bitmap.Width, Bitmap.Height));
+//  Bitmap.Canvas.Brush.Color := clWhite;
+//  Bitmap.Canvas.FillRect(Rect(0, 0, Bitmap.Width, Bitmap.Height));
 
 end;
 
@@ -83,6 +83,8 @@ begin
   Bitmap.Canvas.Brush.Color := clRed;
   Bitmap.Canvas.Pen.Width := Size;
   Bitmap.Canvas.PolyLine([Point(X, Y), Point(X, Y)]);
+
+    LoadPaint;
 
 end;
 
@@ -102,7 +104,7 @@ begin
     Bitmap.Canvas.PolyLine([Point(PMX, PMY), Point(MX, MY)]);
   end;
 
-    LoadPaint;
+  LoadPaint;
 
 end;
 
@@ -110,20 +112,10 @@ procedure TForm1.PaintBox1MouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
   MClick := false;
-
-  Bitmap := TBitmap.Create;
-  Bitmap.Width := PaintBox1.Width;
-  Bitmap.Height := PaintBox1.Height;
-  Dest := Rect(0, 0, Bitmap.Width, Bitmap.Height);
-  Source := Rect(0, 0, PaintBox1.Width, PaintBox1.Height);
-  Bitmap.Canvas.CopyRect(Dest, PaintBox1.Canvas, Source);
-
-
 end;
 
 procedure TForm1.PaintBox1Paint(Sender: TObject);
 begin
-
 
   LoadPaint;
 

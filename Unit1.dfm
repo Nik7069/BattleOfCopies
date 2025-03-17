@@ -13,8 +13,8 @@ object Form1: TForm1
   OnCreate = FormCreate
   TextHeight = 15
   object PaintBox1: TPaintBox
-    Left = 64
-    Top = 64
+    Left = 49
+    Top = 72
     Width = 417
     Height = 289
     OnMouseDown = PaintBox1MouseDown

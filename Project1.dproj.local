@@ -2,9 +2,9 @@
 <BorlandProject>
 	<Transactions>
     <Transaction>1899.12.30 00:00:00.000.169,C:\Users\NIKMSI\Documents\Embarcadero\Studio\Projects\Unit1.dfm=D:\GitHub\BattleOfCopiesTest\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.169,C:\Users\NIKMSI\Documents\Embarcadero\Studio\Projects\Unit1.pas=D:\GitHub\BattleOfCopiesTest\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.255,=C:\Users\NIKMSI\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.774,=C:\Users\NIKMSI\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.169,C:\Users\NIKMSI\Documents\Embarcadero\Studio\Projects\Unit1.pas=D:\GitHub\BattleOfCopiesTest\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.598,C:\Users\NIKMSI\Documents\Embarcadero\Studio\Projects\Project1.dproj=D:\GitHub\BattleOfCopiesTest\Project1.dproj</Transaction>
     <Transaction>1899.12.30 00:00:00.000.059,=C:\Users\NIKMSI\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.558,=C:\Users\NIKMSI\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
