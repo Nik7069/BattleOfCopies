@@ -12,33 +12,41 @@ object Form1: TForm1
   Font.Style = []
   OnCreate = FormCreate
   TextHeight = 15
-  object PaintBox1: TPaintBox
-    Left = 49
-    Top = 72
-    Width = 417
-    Height = 289
-    OnMouseDown = PaintBox1MouseDown
-    OnMouseMove = PaintBox1MouseMove
-    OnMouseUp = PaintBox1MouseUp
-    OnPaint = PaintBox1Paint
-  end
-  object Button1: TButton
-    Left = 496
-    Top = 136
-    Width = 75
-    Height = 25
-    Caption = 'Button1'
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 641
+    Height = 441
+    Caption = 'Panel1'
     TabOrder = 0
-    OnClick = Button1Click
-  end
-  object Button2: TButton
-    Left = 496
-    Top = 232
-    Width = 75
-    Height = 25
-    Caption = 'Button2'
-    TabOrder = 1
-    OnClick = Button2Click
+    object PaintBox1: TPaintBox
+      Left = 49
+      Top = 72
+      Width = 417
+      Height = 289
+      OnMouseDown = PaintBox1MouseDown
+      OnMouseMove = PaintBox1MouseMove
+      OnMouseUp = PaintBox1MouseUp
+      OnPaint = PaintBox1Paint
+    end
+    object Button2: TButton
+      Left = 496
+      Top = 232
+      Width = 75
+      Height = 25
+      Caption = 'Button2'
+      TabOrder = 0
+      OnClick = Button2Click
+    end
+    object Button1: TButton
+      Left = 496
+      Top = 136
+      Width = 75
+      Height = 25
+      Caption = 'Button1'
+      TabOrder = 1
+      OnClick = Button1Click
+    end
   end
   object Timer1: TTimer
     Interval = 10

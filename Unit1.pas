@@ -13,6 +13,7 @@ type
     Timer1: TTimer;
     Button1: TButton;
     Button2: TButton;
+    Panel1: TPanel;
     procedure PaintBox1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure PaintBox1MouseDown(Sender: TObject; Button: TMouseButton;
@@ -65,6 +66,7 @@ end;
 
 procedure TForm1.Button2Click(Sender: TObject);
 begin
+  Form1.Panel1.Visible := false;
   Dest := Rect(0, 0, Bitmap.Width, Bitmap.Height);
   PaintBox1.Canvas.CopyRect(Dest, Bitmap.Canvas, Dest);
 end;
