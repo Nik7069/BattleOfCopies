@@ -2,14 +2,17 @@ program Project1;
 
 uses
   Vcl.Forms,
-  Unit1 in 'Unit1.pas' {Form1},
-  PointConverter in 'PointConverter.pas';
+  Main in 'Main.pas' {MainForm},
+  PointConverter in 'PointConverter.pas',
+  GameLogic in 'GameLogic.pas',
+  PanelsLogic in 'PanelsLogic.pas',
+  SetRulesLogic in 'SetRulesLogic.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TMainForm, MainForm);
   Application.Run;
 end.
