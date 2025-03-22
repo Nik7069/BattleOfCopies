@@ -5,15 +5,24 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
+
+  // Мои юниты
+  GameLogic;
 
 type
   TForm1 = class(TForm)
-    PaintBox1: TPaintBox;
     Timer1: TTimer;
     Button1: TButton;
     Button2: TButton;
-    Panel1: TPanel;
+    pnlGame: TPanel;
+    PaintBox1: TPaintBox;
+    pnlMenu: TPanel;
+    btnStart: TButton;
+    pnlSetRules: TPanel;
+    Button3: TButton;
+    ComboBox1: TComboBox;
+    ComboBox2: TComboBox;
     procedure PaintBox1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure PaintBox1MouseDown(Sender: TObject; Button: TMouseButton;
@@ -24,6 +33,7 @@ type
     procedure Button2Click(Sender: TObject);
     procedure PaintBox1Paint(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure btnStartClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -32,12 +42,11 @@ type
 
 var
   Form1: TForm1;
-  MX, MY, PMX, PMY: Integer;
+//  MX, MY, PMX, PMY: Integer;
   MyColor: TColor;
   Size: Integer = 8;
   MClick: Boolean;
   Bitmap: TBitmap;
-  BitmapE: TBitmap;
   Dest, Source: TRect;
 
 implementation
@@ -46,35 +55,44 @@ uses PointConverter;
 
 {$R *.dfm}
 
-procedure LoadPaint;
+procedure ShowPanel(Panel: TPanel);
 begin
-   Form1.PaintBox1.Canvas.Draw(0, 0, Bitmap);
+  Form1.pnlGame.Visible := False;
+  Form1.pnlMenu.Visible := False;
 
-     PointConverter.SetFieldRect(Rect(0, 0, Form1.ClientWidth, Form1.ClientHeight));
+  Panel.Visible := True;
+  Panel.BringToFront;
 end;
 
 
+procedure LoadPaint;
+begin
+  Form1.PaintBox1.Canvas.Draw(0, 0, Bitmap);
+end;
+
+
+procedure TForm1.btnStartClick(Sender: TObject);
+begin
+  ShowPanel(pnlGame);
+end;
+
 procedure TForm1.Button1Click(Sender: TObject);
 begin
-  BitmapE := TBitmap.Create;
-  BitmapE.Width := PaintBox1.Width;
-  BitmapE.Height := PaintBox1.Height;
-  Dest := Rect(0, 0, BitmapE.Width, BitmapE.Height);
-  Source := Rect(0, 0, PaintBox1.Width, PaintBox1.Height);
-  BitmapE.Canvas.CopyRect(Dest, PaintBox1.Canvas, Source);
+  Form1.pnlGame.Visible := true;
 end;
 
 procedure TForm1.Button2Click(Sender: TObject);
 begin
-  Form1.Panel1.Visible := false;
-  Dest := Rect(0, 0, Bitmap.Width, Bitmap.Height);
-  PaintBox1.Canvas.CopyRect(Dest, Bitmap.Canvas, Dest);
+  ShowPanel(pnlMenu);
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   Bitmap := TBitmap.Create;
   Bitmap.SetSize(PaintBox1.Width, PaintBox1.Height);
+  Bitmap.Canvas.Pen.Color := clRed;
+  Bitmap.Canvas.Brush.Color := clRed;
+  Bitmap.Canvas.Pen.Width := Size;
 //  Bitmap.Canvas.Brush.Color := clWhite;
 //  Bitmap.Canvas.FillRect(Rect(0, 0, Bitmap.Width, Bitmap.Height));
 
@@ -85,33 +103,30 @@ procedure TForm1.PaintBox1MouseDown(Sender: TObject; Button: TMouseButton;
 begin
   MClick := true;
 
-  Bitmap.Canvas.Pen.Color := clRed;
-  Bitmap.Canvas.Brush.Color := clRed;
-  Bitmap.Canvas.Pen.Width := Size;
-  Bitmap.Canvas.PolyLine([Point(X, Y), Point(X, Y)]);
+//  MX := X;
+//  MY := Y;
 
-    LoadPaint;
+  Bitmap.Canvas.MoveTo(X, Y);
+  Bitmap.Canvas.LineTo(X, Y);
+//  Bitmap.Canvas.PolyLine([Point(X, Y), Point(X, Y)]);
 
+  LoadPaint;
 end;
 
 procedure TForm1.PaintBox1MouseMove(Sender: TObject; Shift: TShiftState;
   X, Y: Integer);
 begin
-  PMX := MX;
-  PMY := MY;
-  MX := X;
-  MY := Y;
 
   if MClick then
   begin
-    Bitmap.Canvas.Pen.Color := clRed;
-    Bitmap.Canvas.Brush.Color := clRed;
-    Bitmap.Canvas.Pen.Width := Size;
-    Bitmap.Canvas.PolyLine([Point(PMX, PMY), Point(MX, MY)]);
+//    PMX := MX;
+//    PMY := MY;
+//    MX := X;
+//    MY := Y;
+    Bitmap.Canvas.LineTo(X, Y);
+//    Bitmap.Canvas.PolyLine([Point(PMX, PMY), Point(MX, MY)]);
+    LoadPaint;
   end;
-
-  LoadPaint;
-
 end;
 
 procedure TForm1.PaintBox1MouseUp(Sender: TObject; Button: TMouseButton;

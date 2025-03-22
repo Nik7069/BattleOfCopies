@@ -12,15 +12,18 @@ object Form1: TForm1
   Font.Style = []
   OnCreate = FormCreate
   TextHeight = 15
-  object Panel1: TPanel
+  object pnlGame: TPanel
     Left = 0
     Top = 0
     Width = 641
     Height = 441
-    Caption = 'Panel1'
+    BevelOuter = bvNone
+    Caption = 'PanelGame'
+    ShowCaption = False
     TabOrder = 0
+    Visible = False
     object PaintBox1: TPaintBox
-      Left = 49
+      Left = 48
       Top = 72
       Width = 417
       Height = 289
@@ -46,6 +49,74 @@ object Form1: TForm1
       Caption = 'Button1'
       TabOrder = 1
       OnClick = Button1Click
+    end
+  end
+  object pnlSetRules: TPanel
+    Left = -17
+    Top = 0
+    Width = 641
+    Height = 441
+    BevelOuter = bvNone
+    Caption = 'PanelMenu'
+    ShowCaption = False
+    TabOrder = 2
+    Visible = False
+    object Button3: TButton
+      Left = 288
+      Top = 360
+      Width = 75
+      Height = 25
+      Caption = 'Start'
+      TabOrder = 0
+      OnClick = btnStartClick
+    end
+    object ComboBox1: TComboBox
+      Left = 280
+      Top = 160
+      Width = 145
+      Height = 23
+      ItemIndex = 0
+      TabOrder = 1
+      Text = '3'
+      Items.Strings = (
+        '3'
+        '4'
+        '5'
+        '6'
+        '7'
+        '8')
+    end
+    object ComboBox2: TComboBox
+      Left = 288
+      Top = 224
+      Width = 145
+      Height = 23
+      ItemIndex = 0
+      TabOrder = 2
+      Text = '60'
+      Items.Strings = (
+        '60'
+        '120'
+        '180')
+    end
+  end
+  object pnlMenu: TPanel
+    Left = -17
+    Top = 0
+    Width = 641
+    Height = 441
+    BevelOuter = bvNone
+    Caption = 'PanelMenu'
+    ShowCaption = False
+    TabOrder = 1
+    object btnStart: TButton
+      Left = 288
+      Top = 136
+      Width = 75
+      Height = 25
+      Caption = 'Start'
+      TabOrder = 0
+      OnClick = btnStartClick
     end
   end
   object Timer1: TTimer
