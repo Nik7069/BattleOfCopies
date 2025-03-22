@@ -19,10 +19,6 @@ Coordinates=160,144,60,58
 [Button3]
 Coordinates=121,10,59,58
 
-[ComboBox1]
-Coordinates=10,10,101,124
-Visible=True
-
 [pnlMenu]
 Coordinates=86,144,64,58
 
@@ -31,4 +27,8 @@ Coordinates=259,10,84,58
 
 []
 Coordinates=302,155,91,36
+
+[ComboPlayers]
+Coordinates=10,10,101,124
+Visible=True
 

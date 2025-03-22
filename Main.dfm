@@ -1,7 +1,7 @@
-object Form1: TForm1
+object MainForm: TMainForm
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = 'MainForm'
   ClientHeight = 441
   ClientWidth = 624
   Color = clBtnFace
@@ -51,55 +51,6 @@ object Form1: TForm1
       OnClick = Button1Click
     end
   end
-  object pnlSetRules: TPanel
-    Left = -17
-    Top = 0
-    Width = 641
-    Height = 441
-    BevelOuter = bvNone
-    Caption = 'PanelMenu'
-    ShowCaption = False
-    TabOrder = 2
-    Visible = False
-    object Button3: TButton
-      Left = 288
-      Top = 360
-      Width = 75
-      Height = 25
-      Caption = 'Start'
-      TabOrder = 0
-      OnClick = btnStartClick
-    end
-    object ComboBox1: TComboBox
-      Left = 280
-      Top = 160
-      Width = 145
-      Height = 23
-      ItemIndex = 0
-      TabOrder = 1
-      Text = '3'
-      Items.Strings = (
-        '3'
-        '4'
-        '5'
-        '6'
-        '7'
-        '8')
-    end
-    object ComboBox2: TComboBox
-      Left = 288
-      Top = 224
-      Width = 145
-      Height = 23
-      ItemIndex = 0
-      TabOrder = 2
-      Text = '60'
-      Items.Strings = (
-        '60'
-        '120'
-        '180')
-    end
-  end
   object pnlMenu: TPanel
     Left = -17
     Top = 0
@@ -117,6 +68,83 @@ object Form1: TForm1
       Caption = 'Start'
       TabOrder = 0
       OnClick = btnStartClick
+    end
+  end
+  object pnlSetRules: TPanel
+    Left = -17
+    Top = 0
+    Width = 641
+    Height = 441
+    BevelOuter = bvNone
+    Caption = 'PanelMenu'
+    ShowCaption = False
+    TabOrder = 2
+    Visible = False
+    object Button3: TButton
+      Left = 288
+      Top = 360
+      Width = 75
+      Height = 25
+      Caption = 'Launch'
+      TabOrder = 0
+      OnClick = Button3Click
+    end
+    object ComboPlayers: TComboBox
+      Left = 288
+      Top = 160
+      Width = 145
+      Height = 23
+      ItemIndex = 0
+      TabOrder = 1
+      Text = '3'
+      Items.Strings = (
+        '3'
+        '4'
+        '5'
+        '6'
+        '7'
+        '8')
+    end
+    object ComboSeconds: TComboBox
+      Left = 288
+      Top = 224
+      Width = 145
+      Height = 23
+      ItemIndex = 0
+      TabOrder = 2
+      Text = '60'
+      Items.Strings = (
+        '60'
+        '120'
+        '180')
+    end
+  end
+  object pnlSetNames: TPanel
+    Left = -17
+    Top = 0
+    Width = 641
+    Height = 441
+    BevelOuter = bvNone
+    Caption = 'PanelSetNames'
+    ShowCaption = False
+    TabOrder = 3
+    Visible = False
+    object Button4: TButton
+      Left = 288
+      Top = 360
+      Width = 75
+      Height = 25
+      Caption = 'Launch'
+      TabOrder = 0
+      OnClick = Button4Click
+    end
+    object NameInput: TEdit
+      Left = 264
+      Top = 200
+      Width = 121
+      Height = 23
+      TabOrder = 1
+      TextHint = #1042#1074#1077#1076#1080#1090#1077' '#1087#1089#1077#1074#1076#1086#1085#1080#1084
     end
   end
   object Timer1: TTimer
