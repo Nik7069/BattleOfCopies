@@ -1,29 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>1899.12.30 00:00:00.000.774,=C:\Users\NIKMSI\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.169,C:\Users\NIKMSI\Documents\Embarcadero\Studio\Projects\Unit1.pas=D:\GitHub\BattleOfCopiesTest\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.228,=D:\GitHub\BattleOfCopies\Unit2.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.303,D:\GitHub\BattleOfCopies\Unit2.pas=</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.374,=D:\GitHub\BattleOfCopies\Unit2.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.059,=C:\Users\NIKMSI\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.152,=C:\Users\NIKMSI\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.558,=C:\Users\NIKMSI\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.068,=C:\Users\NIKMSI\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.255,=C:\Users\NIKMSI\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.169,C:\Users\NIKMSI\Documents\Embarcadero\Studio\Projects\Unit1.dfm=D:\GitHub\BattleOfCopiesTest\Unit1.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.598,C:\Users\NIKMSI\Documents\Embarcadero\Studio\Projects\Project1.dproj=D:\GitHub\BattleOfCopiesTest\Project1.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.774,=C:\Users\NIKMSI\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.749,D:\GitHub\BattleOfCopies\Unit2.pas=D:\GitHub\BattleOfCopies\PanelsLogic.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.294,=D:\GitHub\BattleOfCopies\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.969,D:\GitHub\BattleOfCopies\Unit2.pas=D:\GitHub\BattleOfCopies\GameLogic.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.169,D:\GitHub\BattleOfCopiesTest\Unit1.pas=C:\Users\NIKMSI\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.068,=C:\Users\NIKMSI\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.558,=C:\Users\NIKMSI\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.152,=C:\Users\NIKMSI\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.059,=C:\Users\NIKMSI\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.314,D:\GitHub\BattleOfCopies\Unit1.dfm=D:\GitHub\BattleOfCopies\Main.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.948,=D:\GitHub\BattleOfCopies\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.616,=D:\GitHub\BattleOfCopies\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.314,D:\GitHub\BattleOfCopies\Unit1.pas=D:\GitHub\BattleOfCopies\Main.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.169,D:\GitHub\BattleOfCopiesTest\Unit1.dfm=C:\Users\NIKMSI\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
     <Transaction>1899.12.30 00:00:00.000.858,=D:\GitHub\BattleOfCopies\PointConverter.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.785,=D:\GitHub\BattleOfCopies\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.598,D:\GitHub\BattleOfCopiesTest\Project1.dproj=C:\Users\NIKMSI\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.606,D:\GitHub\BattleOfCopies\Unit1.pas=D:\GitHub\BattleOfCopies\SetRulesLogic.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.625,D:\GitHub\BattleOfCopies\Unit2.pas=</Transaction>
-    <Transaction>2025.03.22 16:44:59.948,=D:\GitHub\BattleOfCopies\Unit2.pas</Transaction>
-    <Transaction>2025.03.22 16:45:07.969,D:\GitHub\BattleOfCopies\GameLogic.pas=D:\GitHub\BattleOfCopies\Unit2.pas</Transaction>
-    <Transaction>2025.03.22 17:27:21.294,=D:\GitHub\BattleOfCopies\Unit2.pas</Transaction>
-    <Transaction>2025.03.22 17:27:29.749,D:\GitHub\BattleOfCopies\PanelsLogic.pas=D:\GitHub\BattleOfCopies\Unit2.pas</Transaction>
-    <Transaction>2025.03.22 17:32:54.314,D:\GitHub\BattleOfCopies\Main.dfm=D:\GitHub\BattleOfCopies\Unit1.dfm</Transaction>
-    <Transaction>2025.03.22 17:32:54.314,D:\GitHub\BattleOfCopies\Main.pas=D:\GitHub\BattleOfCopies\Unit1.pas</Transaction>
-    <Transaction>2025.03.22 17:41:07.616,=D:\GitHub\BattleOfCopies\Unit1.pas</Transaction>
-    <Transaction>2025.03.22 17:41:20.606,D:\GitHub\BattleOfCopies\SetRulesLogic.pas=D:\GitHub\BattleOfCopies\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.785,=D:\GitHub\BattleOfCopies\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.374,=D:\GitHub\BattleOfCopies\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.303,D:\GitHub\BattleOfCopies\Unit2.pas=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.228,=D:\GitHub\BattleOfCopies\Unit2.pas</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="PointConverter.pas"/>
