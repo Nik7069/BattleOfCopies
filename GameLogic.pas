@@ -1,4 +1,4 @@
-unit GameLogic;
+﻿unit GameLogic;
 
 interface
 
@@ -56,5 +56,6 @@ procedure PaintMouseUp;
 begin
   MClick := false;
 end;
+
 
 end.

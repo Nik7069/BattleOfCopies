@@ -61,7 +61,7 @@ end;
 
 procedure TMainForm.btnStartClick(Sender: TObject);
 begin
-  ShowPanel(pnlSetRules);
+  LoadPrompts;
 end;
 
 procedure TMainForm.Button1Click(Sender: TObject);

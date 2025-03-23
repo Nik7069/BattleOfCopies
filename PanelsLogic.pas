@@ -1,4 +1,4 @@
-unit PanelsLogic;
+﻿unit PanelsLogic;
 
 interface
 
