@@ -12,45 +12,6 @@ object MainForm: TMainForm
   Font.Style = []
   OnCreate = FormCreate
   TextHeight = 15
-  object pnlGame: TPanel
-    Left = 0
-    Top = 0
-    Width = 641
-    Height = 441
-    BevelOuter = bvNone
-    Caption = 'PanelGame'
-    ShowCaption = False
-    TabOrder = 0
-    Visible = False
-    object PaintBox1: TPaintBox
-      Left = 48
-      Top = 72
-      Width = 417
-      Height = 289
-      OnMouseDown = PaintBox1MouseDown
-      OnMouseMove = PaintBox1MouseMove
-      OnMouseUp = PaintBox1MouseUp
-      OnPaint = PaintBox1Paint
-    end
-    object Button2: TButton
-      Left = 496
-      Top = 232
-      Width = 75
-      Height = 25
-      Caption = 'Button2'
-      TabOrder = 0
-      OnClick = Button2Click
-    end
-    object Button1: TButton
-      Left = 496
-      Top = 136
-      Width = 75
-      Height = 25
-      Caption = 'Button1'
-      TabOrder = 1
-      OnClick = Button1Click
-    end
-  end
   object pnlMenu: TPanel
     Left = -17
     Top = 0
@@ -147,8 +108,57 @@ object MainForm: TMainForm
       TextHint = #1042#1074#1077#1076#1080#1090#1077' '#1087#1089#1077#1074#1076#1086#1085#1080#1084
     end
   end
+  object pnlGame: TPanel
+    Left = 0
+    Top = 0
+    Width = 641
+    Height = 441
+    BevelOuter = bvNone
+    Caption = 'PanelGame'
+    ShowCaption = False
+    TabOrder = 0
+    Visible = False
+    object PaintBox1: TPaintBox
+      Left = 48
+      Top = 72
+      Width = 417
+      Height = 289
+      OnMouseDown = PaintBox1MouseDown
+      OnMouseMove = PaintBox1MouseMove
+      OnMouseUp = PaintBox1MouseUp
+      OnPaint = PaintBox1Paint
+    end
+    object Button2: TButton
+      Left = 496
+      Top = 232
+      Width = 75
+      Height = 25
+      Caption = 'Button2'
+      TabOrder = 0
+      OnClick = Button2Click
+    end
+    object Button1: TButton
+      Left = 496
+      Top = 136
+      Width = 75
+      Height = 25
+      Caption = 'Button1'
+      TabOrder = 1
+      OnClick = Button1Click
+    end
+    object CurrentPrompt: TStaticText
+      Left = 208
+      Top = 32
+      Width = 84
+      Height = 19
+      Caption = 'CurrentPrompt'
+      TabOrder = 2
+    end
+  end
   object Timer1: TTimer
+    Enabled = False
     Interval = 10
+    OnTimer = Timer1Timer
     Left = 520
     Top = 32
   end

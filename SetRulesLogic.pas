@@ -21,14 +21,14 @@ type
 var
   PlayersList: TPlayersList;
   PromptsList: TPromptsList;
+  CountPlayers, CountSeconds: Integer;
 
 implementation
 
 uses
-  Main, PanelsLogic, System.SysUtils, Vcl.Dialogs;
+  Main, PanelsLogic, GameLogic, System.SysUtils, Vcl.Dialogs;
 
 var
-  CountPlayers, CountSeconds: Integer;
   iName: Integer = 0;
 
 procedure ShuffleFirstN(var SomeList: TPromptsList; N: Integer);
@@ -93,6 +93,7 @@ begin
     if iName = CountPlayers then
     begin
       iName := 0;
+      StartGame;
       ShowPanel(MainForm.pnlGame);
     end;
   end

@@ -7,17 +7,21 @@ procedure CreateBitmap;
 procedure PaintMouseDown(X, Y: Integer);
 procedure PaintMouseMove(X, Y: Integer);
 procedure PaintMouseUp;
+procedure StartGame;
+procedure GameTimerEnd;
 
 implementation
 
 uses
-  Main, Vcl.Graphics;
+  Main, Vcl.Graphics, SetRulesLogic, PanelsLogic;
 
 var
   MyColor: TColor;
   Size: Integer = 8;
   MClick: Boolean;
   Bitmap: TBitmap;
+  CurrentPlayer: TPlayer;
+  CurrentPlayerNum: Integer;
 
 procedure LoadPaint;
 begin
@@ -55,6 +59,36 @@ end;
 procedure PaintMouseUp;
 begin
   MClick := false;
+end;
+
+
+procedure NextPlayerGame;
+begin
+  CurrentPlayer := PlayersList[CurrentPlayerNum];
+  MainForm.CurrentPrompt.Caption := CurrentPlayer.Prompt;
+
+  MainForm.Timer1.Interval := CountSeconds*100;
+  MainForm.Timer1.Enabled := True;
+end;
+
+procedure StartGame;
+begin
+  CurrentPlayerNum := 0;
+  NextPlayerGame;
+end;
+
+procedure GameTimerEnd;
+begin
+  Inc(CurrentPlayerNum);
+  if CurrentPlayerNum = CountPlayers then
+  begin
+    ShowPanel(MainForm.pnlMenu);
+  end
+  else
+  begin
+    NextPlayerGame;
+  end;
+
 end;
 
 

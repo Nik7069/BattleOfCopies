@@ -26,6 +26,7 @@ type
     pnlSetNames: TPanel;
     Button4: TButton;
     NameInput: TEdit;
+    CurrentPrompt: TStaticText;
     procedure PaintBox1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure PaintBox1MouseDown(Sender: TObject; Button: TMouseButton;
@@ -39,6 +40,7 @@ type
     procedure btnStartClick(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
   private
     { Private declarations }
   public
@@ -105,6 +107,11 @@ end;
 procedure TMainForm.PaintBox1Paint(Sender: TObject);
 begin
   LoadPaint;
+end;
+
+procedure TMainForm.Timer1Timer(Sender: TObject);
+begin
+  GameTimerEnd;
 end;
 
 end.
