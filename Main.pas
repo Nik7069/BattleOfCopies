@@ -27,6 +27,8 @@ type
     Button4: TButton;
     NameInput: TEdit;
     CurrentPrompt: TStaticText;
+    CustomPB: TPanel;
+    ProgressPB: TLabel;
     procedure PaintBox1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure PaintBox1MouseDown(Sender: TObject; Button: TMouseButton;
@@ -111,7 +113,7 @@ end;
 
 procedure TMainForm.Timer1Timer(Sender: TObject);
 begin
-  GameTimerEnd;
+  GameTimer;
 end;
 
 end.

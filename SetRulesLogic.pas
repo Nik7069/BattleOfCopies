@@ -2,6 +2,9 @@
 
 interface
 
+uses
+  Vcl.Graphics;
+
 procedure AddNewPlayer;
 procedure AddNewRules;
 procedure LoadPrompts;
@@ -12,6 +15,7 @@ type
     Prompt: String;
     id: Integer;
     Score: Integer;
+    Bitmap: TBitmap;
   End;
 
 type

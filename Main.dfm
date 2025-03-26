@@ -118,6 +118,9 @@ object MainForm: TMainForm
     ShowCaption = False
     TabOrder = 0
     Visible = False
+    DesignSize = (
+      641
+      441)
     object PaintBox1: TPaintBox
       Left = 48
       Top = 72
@@ -153,6 +156,39 @@ object MainForm: TMainForm
       Height = 19
       Caption = 'CurrentPrompt'
       TabOrder = 2
+    end
+    object CustomPB: TPanel
+      Left = 120
+      Top = 391
+      Width = 400
+      Height = 30
+      Anchors = []
+      BevelOuter = bvNone
+      Color = clCream
+      Ctl3D = True
+      ParentBackground = False
+      ParentCtl3D = False
+      TabOrder = 3
+      object ProgressPB: TLabel
+        Left = 0
+        Top = 0
+        Width = 400
+        Height = 30
+        Alignment = taCenter
+        AutoSize = False
+        BiDiMode = bdRightToLeft
+        Color = clBlack
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -20
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentBiDiMode = False
+        ParentColor = False
+        ParentFont = False
+        Transparent = False
+        WordWrap = True
+      end
     end
   end
   object Timer1: TTimer
