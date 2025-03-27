@@ -13,7 +13,7 @@ type
   TPlayer = Record
     Name: String;
     Prompt: String;
-    id: Integer;
+    id, copyid: Integer;
     Score: Integer;
     BitmapOrig, BitmapCopy: TBitmap;
   End;

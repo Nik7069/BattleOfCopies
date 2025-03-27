@@ -19,6 +19,7 @@ begin
   MainForm.pnlSetRules.Visible := False;
   MainForm.pnlSetNames.Visible := False;
   MainForm.pnlWaitReady.Visible := False;
+  MainForm.pnlVote.Visible := False;
 
   Panel.Visible := True;
   Panel.BringToFront;

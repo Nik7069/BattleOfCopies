@@ -8,7 +8,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
 
   // Мои юниты
-  GameLogic, PanelsLogic, SetRulesLogic;
+  GameLogic, PanelsLogic, SetRulesLogic, VoteLogic;
 
 type
   TMainForm = class(TForm)
@@ -34,11 +34,11 @@ type
     txtReadyPlayer: TStaticText;
     txtAreReady: TStaticText;
     pnlVote: TPanel;
-    PaintVote1: TPaintBox;
-    StaticText1: TStaticText;
+    txtPromptVote: TStaticText;
     Timer2: TTimer;
+    PaintVote1: TPaintBox;
     PaintVote2: TPaintBox;
-    PaintVote3: TPaintBox;
+    btnEndVote: TButton;
     procedure PaintBox1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure PaintBox1MouseDown(Sender: TObject; Button: TMouseButton;
@@ -55,6 +55,9 @@ type
     procedure Timer1Timer(Sender: TObject);
     procedure btnReadyClick(Sender: TObject);
     procedure Timer2Timer(Sender: TObject);
+    procedure btnEndVoteClick(Sender: TObject);
+    procedure PaintVote1Paint(Sender: TObject);
+    procedure PaintVote2Paint(Sender: TObject);
   private
     { Private declarations }
   public
@@ -73,6 +76,12 @@ uses PointConverter;
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
 //  CreateBitmap;
+  Randomize;
+end;
+
+procedure TMainForm.btnEndVoteClick(Sender: TObject);
+begin
+  CalculatePoints;
 end;
 
 procedure TMainForm.btnReadyClick(Sender: TObject);
@@ -126,6 +135,16 @@ end;
 procedure TMainForm.PaintBox1Paint(Sender: TObject);
 begin
   LoadPaint;
+end;
+
+procedure TMainForm.PaintVote1Paint(Sender: TObject);
+begin
+  LoadPaintVote1;
+end;
+
+procedure TMainForm.PaintVote2Paint(Sender: TObject);
+begin
+  LoadPaintVote2;
 end;
 
 procedure TMainForm.Timer1Timer(Sender: TObject);

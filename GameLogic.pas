@@ -28,7 +28,7 @@ var
   MClick: Boolean;
   Bitmap: TBitmap;
   CurrentPlayer: TPlayer;
-  CurrentPlayerNum: Integer;
+  CurrentPlayerNum, CurrentOrigNum: Integer;
   pbTime, pbMax, pbStartTime: Integer;
   IsPaintOriginal: Boolean;
   RoundNum: Integer;
@@ -79,7 +79,6 @@ end;
 
 procedure NextPlayerGame;
 begin
-  ShowPanel(MainForm.pnlGame);
   if IsPaintOriginal then
   begin
     MainForm.CurrentPrompt.Caption := CurrentPlayer.Prompt;
@@ -107,9 +106,11 @@ end;
 
 procedure NextPlayerRemember;
 begin
-  ShowPanel(MainForm.pnlGame);
 
-  Bitmap.Assign(PlayersList[(CurrentPlayerNum+1) mod CountPlayers].BitmapOrig);
+  CurrentOrigNum := (CurrentPlayerNum+1) mod CountPlayers;
+  PlayersList[CurrentOrigNum].copyid := CurrentPlayerNum;
+
+  Bitmap.Assign(PlayersList[CurrentOrigNum].BitmapOrig);
   LoadPaint;
   MainForm.PaintBox1.Enabled := false;
 
@@ -146,10 +147,12 @@ begin
   if not IsPaintOriginal then
   begin
     NextPlayerRemember;
+    ShowPanel(MainForm.pnlGame);
   end
   else
   begin
     NextPlayerGame;
+    ShowPanel(MainForm.pnlGame);
   end;
 
 end;

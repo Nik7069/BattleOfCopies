@@ -2,7 +2,7 @@ object MainForm: TMainForm
   Left = 0
   Top = 0
   Caption = 'MainForm'
-  ClientHeight = 441
+  ClientHeight = 442
   ClientWidth = 624
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -166,10 +166,10 @@ object MainForm: TMainForm
       641
       441)
     object PaintBox1: TPaintBox
-      Left = 48
-      Top = 72
-      Width = 417
-      Height = 289
+      Left = 207
+      Top = 57
+      Width = 210
+      Height = 297
       OnMouseDown = PaintBox1MouseDown
       OnMouseMove = PaintBox1MouseMove
       OnMouseUp = PaintBox1MouseUp
@@ -194,7 +194,7 @@ object MainForm: TMainForm
       OnClick = Button1Click
     end
     object CurrentPrompt: TStaticText
-      Left = 208
+      Left = 264
       Top = 32
       Width = 84
       Height = 19
@@ -236,7 +236,7 @@ object MainForm: TMainForm
     end
   end
   object pnlVote: TPanel
-    Left = -17
+    Left = 0
     Top = 0
     Width = 641
     Height = 441
@@ -246,56 +246,55 @@ object MainForm: TMainForm
     TabOrder = 5
     Visible = False
     object PaintVote1: TPaintBox
-      Left = 32
+      Left = 59
       Top = 72
-      Width = 175
-      Height = 300
+      Width = 210
+      Height = 297
       OnMouseDown = PaintBox1MouseDown
       OnMouseMove = PaintBox1MouseMove
       OnMouseUp = PaintBox1MouseUp
-      OnPaint = PaintBox1Paint
+      OnPaint = PaintVote1Paint
     end
     object PaintVote2: TPaintBox
-      Left = 235
+      Left = 361
       Top = 72
-      Width = 175
-      Height = 300
+      Width = 210
+      Height = 297
       OnMouseDown = PaintBox1MouseDown
       OnMouseMove = PaintBox1MouseMove
       OnMouseUp = PaintBox1MouseUp
-      OnPaint = PaintBox1Paint
+      OnPaint = PaintVote2Paint
     end
-    object PaintVote3: TPaintBox
-      Left = 440
-      Top = 72
-      Width = 175
-      Height = 300
-      OnMouseDown = PaintBox1MouseDown
-      OnMouseMove = PaintBox1MouseMove
-      OnMouseUp = PaintBox1MouseUp
-      OnPaint = PaintBox1Paint
-    end
-    object StaticText1: TStaticText
-      Left = 208
+    object txtPromptVote: TStaticText
+      Left = 281
       Top = 32
       Width = 84
       Height = 19
       Caption = 'CurrentPrompt'
       TabOrder = 0
     end
+    object btnEndVote: TButton
+      Left = 288
+      Top = 391
+      Width = 75
+      Height = 25
+      Caption = 'End vote'
+      TabOrder = 1
+      OnClick = btnEndVoteClick
+    end
   end
   object Timer1: TTimer
     Enabled = False
     Interval = 10
     OnTimer = Timer1Timer
-    Left = 520
-    Top = 32
+    Left = 552
+    Top = 8
   end
   object Timer2: TTimer
     Enabled = False
     Interval = 10
     OnTimer = Timer2Timer
-    Left = 560
-    Top = 40
+    Left = 600
+    Top = 8
   end
 end
