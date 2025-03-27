@@ -6,7 +6,8 @@ uses
   PointConverter in 'PointConverter.pas',
   GameLogic in 'GameLogic.pas',
   PanelsLogic in 'PanelsLogic.pas',
-  SetRulesLogic in 'SetRulesLogic.pas';
+  SetRulesLogic in 'SetRulesLogic.pas',
+  VoteLogic in 'VoteLogic.pas';
 
 {$R *.res}
 

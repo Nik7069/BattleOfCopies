@@ -15,7 +15,7 @@ type
     Prompt: String;
     id: Integer;
     Score: Integer;
-    Bitmap: TBitmap;
+    BitmapOrig, BitmapCopy: TBitmap;
   End;
 
 type
@@ -87,7 +87,8 @@ begin
   begin
     NewPlayer.id := iName;
     NewPlayer.Prompt := PromptsList[iName];
-    NewPlayer.Bitmap := TBitmap.Create;
+    NewPlayer.BitmapOrig := TBitmap.Create;
+    NewPlayer.BitmapCopy := TBitmap.Create;
     PlayersList[iName] := NewPlayer;
     MainForm.NameInput.Clear;
 

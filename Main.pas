@@ -33,6 +33,12 @@ type
     btnReady: TButton;
     txtReadyPlayer: TStaticText;
     txtAreReady: TStaticText;
+    pnlVote: TPanel;
+    PaintVote1: TPaintBox;
+    StaticText1: TStaticText;
+    Timer2: TTimer;
+    PaintVote2: TPaintBox;
+    PaintVote3: TPaintBox;
     procedure PaintBox1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure PaintBox1MouseDown(Sender: TObject; Button: TMouseButton;
@@ -48,6 +54,7 @@ type
     procedure Button4Click(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure btnReadyClick(Sender: TObject);
+    procedure Timer2Timer(Sender: TObject);
   private
     { Private declarations }
   public
@@ -124,6 +131,11 @@ end;
 procedure TMainForm.Timer1Timer(Sender: TObject);
 begin
   GameTimer;
+end;
+
+procedure TMainForm.Timer2Timer(Sender: TObject);
+begin
+  RememberTimer;
 end;
 
 end.

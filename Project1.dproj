@@ -132,6 +132,7 @@
         <DCCReference Include="GameLogic.pas"/>
         <DCCReference Include="PanelsLogic.pas"/>
         <DCCReference Include="SetRulesLogic.pas"/>
+        <DCCReference Include="VoteLogic.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

@@ -12,6 +12,7 @@ procedure PaintMouseMove(X, Y: Integer);
 procedure PaintMouseUp;
 procedure StartGame;
 procedure GameTimer;
+procedure RememberTimer;
 procedure PlayerIsReady;
 procedure NextPlayerWait;
 procedure CleanBitmap(var CleanThisBM: TBitmap);
@@ -19,7 +20,7 @@ procedure CleanBitmap(var CleanThisBM: TBitmap);
 implementation
 
 uses
-  Main, System.Classes, SetRulesLogic, PanelsLogic;
+  Main, System.Classes, SetRulesLogic, PanelsLogic, VoteLogic;
 
 var
   MyColor: TColor;
@@ -29,6 +30,8 @@ var
   CurrentPlayer: TPlayer;
   CurrentPlayerNum: Integer;
   pbTime, pbMax, pbStartTime: Integer;
+  IsPaintOriginal: Boolean;
+  RoundNum: Integer;
 
 procedure LoadPaint;
 begin
@@ -77,10 +80,18 @@ end;
 procedure NextPlayerGame;
 begin
   ShowPanel(MainForm.pnlGame);
-  MainForm.CurrentPrompt.Caption := CurrentPlayer.Prompt;
+  if IsPaintOriginal then
+  begin
+    MainForm.CurrentPrompt.Caption := CurrentPlayer.Prompt;
+  end
+  else
+  begin
+    MainForm.CurrentPrompt.Caption := 'Write this paint now!';
+  end;
 
   CleanBitmap(Bitmap);
   LoadPaint;
+  MainForm.PaintBox1.Enabled := true;
 
   // Прогресс бар "падает"
   pbMax := MainForm.CustomPB.Width;
@@ -94,6 +105,26 @@ begin
   MainForm.Timer1.Enabled := True;
 end;
 
+procedure NextPlayerRemember;
+begin
+  ShowPanel(MainForm.pnlGame);
+
+  Bitmap.Assign(PlayersList[(CurrentPlayerNum+1) mod CountPlayers].BitmapOrig);
+  LoadPaint;
+  MainForm.PaintBox1.Enabled := false;
+
+  pbMax := MainForm.CustomPB.Width;
+  MainForm.ProgressPB.Width := pbMax;
+
+  pbStartTime := GetTickCount;
+
+  pbTime := CountSeconds*1000 div 10;
+  MainForm.Timer2.Interval := 1; // Любое значение, лучше < 50 для плавности
+  MainForm.Timer2.Enabled := True;
+
+  MainForm.CurrentPrompt.Caption := 'Remember this paint!';
+end;
+
 procedure NextPlayerWait;
 begin
   ShowPanel(MainForm.pnlWaitReady);
@@ -105,12 +136,36 @@ procedure StartGame;
 begin
   CreateBitmap;
   CurrentPlayerNum := 0;
+  RoundNum := 0;
+  IsPaintOriginal := true;
   NextPlayerWait;
 end;
 
 procedure PlayerIsReady;
 begin
-  NextPlayerGame;
+  if not IsPaintOriginal then
+  begin
+    NextPlayerRemember;
+  end
+  else
+  begin
+    NextPlayerGame;
+  end;
+
+end;
+
+procedure RememberTimer;
+var ElapsedTime: Integer;
+begin
+  ElapsedTime := GetTickCount - pbStartTime;
+
+  MainForm.ProgressPB.Width := pbMax - Round(pbMax * ElapsedTime / pbTime);
+
+  if ElapsedTime >= pbTime then
+  begin
+    MainForm.Timer2.Enabled := False;
+    NextPlayerGame;
+  end;
 end;
 
 procedure GameTimer;
@@ -126,18 +181,33 @@ begin
   begin
     MainForm.Timer1.Enabled := False;
 
-    CurrentPlayer.Bitmap.Assign(Bitmap);
+    if IsPaintOriginal then
+    begin
+      CurrentPlayer.BitmapOrig.Assign(Bitmap);
+    end
+    else
+    begin
+      CurrentPlayer.BitmapCopy.Assign(Bitmap);
+    end;
 
     Inc(CurrentPlayerNum);
     if CurrentPlayerNum = CountPlayers then
     begin
-      CurrentPlayer.Bitmap := Bitmap;
-      ShowPanel(MainForm.pnlMenu);
-    end
-    else
+      CurrentPlayerNum := 0;
+      if not IsPaintOriginal then
+      begin
+        VoteStart;
+        Inc(RoundNum);
+      end;
+
+      IsPaintOriginal := not IsPaintOriginal;
+    end;
+
+    if not IsVoting then
     begin
       NextPlayerWait;
-    end;
+    end
+
   end;
 end;
 
