@@ -13,7 +13,7 @@ object MainForm: TMainForm
   OnCreate = FormCreate
   TextHeight = 15
   object pnlMenu: TPanel
-    Left = -17
+    Left = 0
     Top = 0
     Width = 641
     Height = 441
@@ -32,7 +32,7 @@ object MainForm: TMainForm
     end
   end
   object pnlSetRules: TPanel
-    Left = -17
+    Left = 0
     Top = 0
     Width = 641
     Height = 441
@@ -81,7 +81,7 @@ object MainForm: TMainForm
     end
   end
   object pnlSetNames: TPanel
-    Left = -17
+    Left = 0
     Top = 0
     Width = 641
     Height = 441
@@ -189,6 +189,50 @@ object MainForm: TMainForm
         Transparent = False
         WordWrap = True
       end
+    end
+  end
+  object pnlWaitReady: TPanel
+    Left = 0
+    Top = 0
+    Width = 641
+    Height = 441
+    BevelOuter = bvNone
+    Caption = 'PanelWaitReady'
+    ShowCaption = False
+    TabOrder = 4
+    Visible = False
+    object btnReady: TButton
+      Left = 288
+      Top = 360
+      Width = 75
+      Height = 25
+      Caption = 'Im ready!'
+      TabOrder = 0
+      OnClick = btnReadyClick
+    end
+    object txtReadyPlayer: TStaticText
+      Left = 75
+      Top = 134
+      Width = 504
+      Height = 49
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'asdsadsad  as'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -32
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+    end
+    object txtAreReady: TStaticText
+      Left = 288
+      Top = 199
+      Width = 85
+      Height = 19
+      Caption = 'Are you ready?!'
+      TabOrder = 2
     end
   end
   object Timer1: TTimer

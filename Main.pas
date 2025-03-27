@@ -29,6 +29,10 @@ type
     CurrentPrompt: TStaticText;
     CustomPB: TPanel;
     ProgressPB: TLabel;
+    pnlWaitReady: TPanel;
+    btnReady: TButton;
+    txtReadyPlayer: TStaticText;
+    txtAreReady: TStaticText;
     procedure PaintBox1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure PaintBox1MouseDown(Sender: TObject; Button: TMouseButton;
@@ -43,6 +47,7 @@ type
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure btnReadyClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -60,7 +65,12 @@ uses PointConverter;
 
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
-  CreateBitmap;
+//  CreateBitmap;
+end;
+
+procedure TMainForm.btnReadyClick(Sender: TObject);
+begin
+  PlayerIsReady;
 end;
 
 procedure TMainForm.btnStartClick(Sender: TObject);

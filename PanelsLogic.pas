@@ -17,6 +17,8 @@ begin
   MainForm.pnlGame.Visible := False;
   MainForm.pnlMenu.Visible := False;
   MainForm.pnlSetRules.Visible := False;
+  MainForm.pnlSetNames.Visible := False;
+  MainForm.pnlWaitReady.Visible := False;
 
   Panel.Visible := True;
   Panel.BringToFront;

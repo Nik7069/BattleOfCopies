@@ -87,10 +87,9 @@ begin
   begin
     NewPlayer.id := iName;
     NewPlayer.Prompt := PromptsList[iName];
+    NewPlayer.Bitmap := TBitmap.Create;
     PlayersList[iName] := NewPlayer;
     MainForm.NameInput.Clear;
-
-
 
 
     Inc(iName);
@@ -98,7 +97,6 @@ begin
     begin
       iName := 0;
       StartGame;
-      ShowPanel(MainForm.pnlGame);
     end;
   end
   else

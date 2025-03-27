@@ -3,7 +3,7 @@
 interface
 
 uses
-  Winapi.Windows;
+  Winapi.Windows, Vcl.Graphics;
 
 procedure LoadPaint;
 procedure CreateBitmap;
@@ -12,11 +12,14 @@ procedure PaintMouseMove(X, Y: Integer);
 procedure PaintMouseUp;
 procedure StartGame;
 procedure GameTimer;
+procedure PlayerIsReady;
+procedure NextPlayerWait;
+procedure CleanBitmap(var CleanThisBM: TBitmap);
 
 implementation
 
 uses
-  Main, Vcl.Graphics, System.Classes, SetRulesLogic, PanelsLogic;
+  Main, System.Classes, SetRulesLogic, PanelsLogic;
 
 var
   MyColor: TColor;
@@ -32,11 +35,10 @@ begin
   MainForm.PaintBox1.Canvas.Draw(0, 0, Bitmap);
 end;
 
-procedure CleanBitmap;
+procedure CleanBitmap(var CleanThisBM: TBitmap);
 begin
-  Bitmap.Canvas.Brush.Color := clWhite;
-  Bitmap.Canvas.FillRect(Rect(0, 0, Bitmap.Width, Bitmap.Height));
-  LoadPaint;
+  CleanThisBM.Canvas.Brush.Color := clWhite;
+  CleanThisBM.Canvas.FillRect(Rect(0, 0, CleanThisBM.Width, CleanThisBM.Height));
 end;
 
 procedure CreateBitmap;
@@ -45,7 +47,6 @@ begin
   Bitmap.SetSize(MainForm.PaintBox1.Width, MainForm.PaintBox1.Height);
   Bitmap.Canvas.Pen.Color := clBlack;
   Bitmap.Canvas.Pen.Width := Size;
-  CleanBitmap;
 end;
 
 procedure PaintMouseDown(X, Y: Integer);
@@ -75,10 +76,11 @@ end;
 
 procedure NextPlayerGame;
 begin
-  CurrentPlayer := PlayersList[CurrentPlayerNum];
+  ShowPanel(MainForm.pnlGame);
   MainForm.CurrentPrompt.Caption := CurrentPlayer.Prompt;
 
-  CleanBitmap;
+  CleanBitmap(Bitmap);
+  LoadPaint;
 
   // Прогресс бар "падает"
   pbMax := MainForm.CustomPB.Width;
@@ -92,9 +94,22 @@ begin
   MainForm.Timer1.Enabled := True;
 end;
 
+procedure NextPlayerWait;
+begin
+  ShowPanel(MainForm.pnlWaitReady);
+  CurrentPlayer := PlayersList[CurrentPlayerNum];
+  MainForm.txtReadyPlayer.Caption := CurrentPlayer.Name;
+end;
+
 procedure StartGame;
 begin
+  CreateBitmap;
   CurrentPlayerNum := 0;
+  NextPlayerWait;
+end;
+
+procedure PlayerIsReady;
+begin
   NextPlayerGame;
 end;
 
@@ -111,6 +126,8 @@ begin
   begin
     MainForm.Timer1.Enabled := False;
 
+    CurrentPlayer.Bitmap.Assign(Bitmap);
+
     Inc(CurrentPlayerNum);
     if CurrentPlayerNum = CountPlayers then
     begin
@@ -119,14 +136,9 @@ begin
     end
     else
     begin
-      NextPlayerGame;
+      NextPlayerWait;
     end;
   end;
-
-
-
-
-
 end;
 
 
