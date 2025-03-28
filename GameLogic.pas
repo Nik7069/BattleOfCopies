@@ -147,14 +147,15 @@ begin
   if not IsPaintOriginal then
   begin
     NextPlayerRemember;
-    ShowPanel(MainForm.pnlGame);
+//    ShowPanel(MainForm.pnlGame);
   end
   else
   begin
     NextPlayerGame;
-    ShowPanel(MainForm.pnlGame);
+//    ShowPanel(MainForm.pnlGame);
   end;
 
+  ShowPanel(MainForm.pnlGame);
 end;
 
 procedure RememberTimer;

@@ -55,10 +55,9 @@ begin
   CountPlayers := StrToInt(MainForm.ComboPlayers.Items[MainForm.ComboPlayers.ItemIndex]);
   CountSeconds := StrToInt(MainForm.ComboSeconds.Items[MainForm.ComboSeconds.ItemIndex]);
 
-  SetLength(PlayersList, CountPlayers);
-
   if CountPlayers <= Length(PromptsList) then
   begin
+    SetLength(PlayersList, CountPlayers);
     ShuffleFirstN(PromptsList, CountPlayers);
     ShowPanel(MainForm.pnlSetNames);
   end
@@ -77,11 +76,20 @@ var
 begin
   NewPlayer.Name := Trim(MainForm.NameInput.Text);
   SameName := false;
-  for i := Low(PlayersList) to iName-1 do
+//  for i := Low(PlayersList) to iName-1 do
+//  begin
+//    if PlayersList[i].Name = NewPlayer.Name then
+//      SameName := true;
+//  end;
+
+  i := Low(PlayersList);
+  while (not SameName) and (i < iName) do
   begin
     if PlayersList[i].Name = NewPlayer.Name then
       SameName := true;
+    Inc(i);
   end;
+
 
   if (not SameName) and (NewPlayer.Name <> '') then
   begin
@@ -131,7 +139,6 @@ begin
 
     end;
     closeFile(myFile);
-    ShowPanel(MainForm.pnlSetRules);
   except
     showMessage('Файл с заданиями не найден, переустановите программу');
   end;
