@@ -2,8 +2,8 @@ object MainForm: TMainForm
   Left = 0
   Top = 0
   Caption = 'MainForm'
-  ClientHeight = 442
-  ClientWidth = 624
+  ClientHeight = 504
+  ClientWidth = 645
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,12 +15,15 @@ object MainForm: TMainForm
   object pnlMenu: TPanel
     Left = 0
     Top = 0
-    Width = 641
-    Height = 441
+    Width = 645
+    Height = 504
+    Align = alClient
     BevelOuter = bvNone
     Caption = 'PanelMenu'
     ShowCaption = False
     TabOrder = 1
+    ExplicitWidth = 641
+    ExplicitHeight = 441
     object btnStart: TButton
       Left = 288
       Top = 136
@@ -34,13 +37,16 @@ object MainForm: TMainForm
   object pnlSetRules: TPanel
     Left = 0
     Top = 0
-    Width = 641
-    Height = 441
+    Width = 645
+    Height = 504
+    Align = alClient
     BevelOuter = bvNone
     Caption = 'PanelMenu'
     ShowCaption = False
     TabOrder = 2
     Visible = False
+    ExplicitWidth = 641
+    ExplicitHeight = 441
     object Button3: TButton
       Left = 288
       Top = 360
@@ -83,13 +89,16 @@ object MainForm: TMainForm
   object pnlSetNames: TPanel
     Left = 0
     Top = 0
-    Width = 641
-    Height = 441
+    Width = 645
+    Height = 504
+    Align = alClient
     BevelOuter = bvNone
     Caption = 'PanelSetNames'
     ShowCaption = False
     TabOrder = 3
     Visible = False
+    ExplicitWidth = 641
+    ExplicitHeight = 441
     object Button4: TButton
       Left = 288
       Top = 360
@@ -111,13 +120,16 @@ object MainForm: TMainForm
   object pnlWaitReady: TPanel
     Left = 0
     Top = 0
-    Width = 641
-    Height = 441
+    Width = 645
+    Height = 504
+    Align = alClient
     BevelOuter = bvNone
     Caption = 'PanelWaitReady'
     ShowCaption = False
     TabOrder = 4
     Visible = False
+    ExplicitWidth = 641
+    ExplicitHeight = 441
     object btnReady: TButton
       Left = 288
       Top = 360
@@ -155,16 +167,19 @@ object MainForm: TMainForm
   object pnlGame: TPanel
     Left = 0
     Top = 0
-    Width = 641
-    Height = 441
+    Width = 645
+    Height = 504
+    Align = alClient
     BevelOuter = bvNone
     Caption = 'PanelGame'
     ShowCaption = False
     TabOrder = 0
     Visible = False
+    ExplicitWidth = 641
+    ExplicitHeight = 441
     DesignSize = (
-      641
-      441)
+      645
+      504)
     object PaintBox1: TPaintBox
       Left = 207
       Top = 57
@@ -202,8 +217,8 @@ object MainForm: TMainForm
       TabOrder = 2
     end
     object CustomPB: TPanel
-      Left = 120
-      Top = 391
+      Left = 122
+      Top = 449
       Width = 400
       Height = 30
       Anchors = []
@@ -213,6 +228,8 @@ object MainForm: TMainForm
       ParentBackground = False
       ParentCtl3D = False
       TabOrder = 3
+      ExplicitLeft = 120
+      ExplicitTop = 391
       object ProgressPB: TLabel
         Left = 0
         Top = 0
@@ -238,13 +255,17 @@ object MainForm: TMainForm
   object pnlVote: TPanel
     Left = 0
     Top = 0
-    Width = 641
-    Height = 441
+    Width = 645
+    Height = 504
+    Align = alClient
     BevelOuter = bvNone
     Caption = 'PanelVote'
     ShowCaption = False
     TabOrder = 5
     Visible = False
+    ExplicitTop = 2
+    ExplicitWidth = 609
+    ExplicitHeight = 463
     object PaintVote1: TPaintBox
       Left = 59
       Top = 72
@@ -266,7 +287,7 @@ object MainForm: TMainForm
       OnPaint = PaintVote2Paint
     end
     object txtPromptVote: TStaticText
-      Left = 281
+      Left = 280
       Top = 32
       Width = 84
       Height = 19
@@ -274,13 +295,21 @@ object MainForm: TMainForm
       TabOrder = 0
     end
     object btnEndVote: TButton
-      Left = 288
-      Top = 391
+      Left = 280
+      Top = 329
       Width = 75
       Height = 25
       Caption = 'End vote'
       TabOrder = 1
       OnClick = btnEndVoteClick
+    end
+    object fpVoteUsers: TFlowPanel
+      Left = 59
+      Top = 391
+      Width = 512
+      Height = 98
+      BevelOuter = bvNone
+      TabOrder = 2
     end
   end
   object Timer1: TTimer

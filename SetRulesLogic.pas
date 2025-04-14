@@ -53,7 +53,7 @@ end;
 procedure AddNewRules;
 begin
   CountPlayers := StrToInt(MainForm.ComboPlayers.Items[MainForm.ComboPlayers.ItemIndex]);
-  CountSeconds := StrToInt(MainForm.ComboSeconds.Items[MainForm.ComboSeconds.ItemIndex]);
+  CountSeconds := StrToInt(MainForm.ComboSeconds.Items[MainForm.ComboSeconds.ItemIndex]) div 10;
 
   if CountPlayers <= Length(PromptsList) then
   begin

@@ -39,6 +39,7 @@ type
     PaintVote1: TPaintBox;
     PaintVote2: TPaintBox;
     btnEndVote: TButton;
+    fpVoteUsers: TFlowPanel;
     procedure PaintBox1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure PaintBox1MouseDown(Sender: TObject; Button: TMouseButton;

@@ -5,18 +5,30 @@ interface
 //uses
   //Winapi.Windows, Vcl.Graphics;
 
+uses
+  Vcl.StdCtrls, SetRulesLogic;
+
 procedure VoteStart;
 procedure CalculatePoints;
 procedure LoadPaintVote1;
 procedure LoadPaintVote2;
 
+type
+  Card = record
+    Player: TPlayer;
+    LabelCard: TLabel;
+  end;
+
+  TVoteCardsList = array of Card;
+
 var
   IsVoting: boolean = false;
+  VoteCardsList: TVoteCardsList;
 
 implementation
 
 uses
-  Main, PanelsLogic, SetRulesLogic, Vcl.ExtCtrls, Vcl.Graphics, GameLogic;
+  Main, System.Classes, PanelsLogic, Vcl.ExtCtrls, Vcl.Graphics, GameLogic;
 
 var
   CurrentOriginalNum: Integer;
@@ -36,10 +48,31 @@ begin
 end;
 
 
+procedure CreateNewCard(Player: TPlayer; VotersCount: Integer);
+var
+  NewCard: Card;
+begin
+  NewCard.LabelCard := TLabel.Create(MainForm);
+  NewCard.LabelCard.Parent := MainForm.fpVoteUsers;
+  NewCard.LabelCard.Caption := Player.Name;
+  NewCard.LabelCard.Width := 120;
+  NewCard.LabelCard.Height := 40;
+  NewCard.LabelCard.Color := clBtnHighLight;
+  NewCard.LabelCard.Transparent := false;
+  NewCard.LabelCard.Alignment := taCenter;
+  NewCard.LabelCard.Layout := tlCenter;
+
+  NewCard.Player := Player;
+
+
+  VoteCardsList[VotersCount] := NewCard;
+end;
+
 
 procedure NextPlayerVote;
 var
   i: Integer;
+  VotersCount: Integer;
 begin
 
   CurrentOriginal := PlayersList[CurrentOriginalNum];
@@ -52,6 +85,32 @@ begin
 
   LoadPaintVote1;
   LoadPaintVote2;
+
+  for i := 0 to High(VoteCardsList) do
+  begin
+    if Assigned(VoteCardsList[i].LabelCard) then
+    begin
+      VoteCardsList[i].LabelCard.Free;
+      VoteCardsList[i].LabelCard := nil;
+    end;
+  end;
+    
+
+
+  SetLength(VoteCardsList, CountPlayers - LenPVL);
+
+  VotersCount := 0;
+
+  for i := 0 to CountPlayers - 1 do
+  begin
+    if (CurrentOriginalNum <> i) and (CurrentOriginal.copyid <> i) then
+    begin
+      CreateNewCard(PlayersList[i], VotersCount);
+      Inc(VotersCount);
+    end;
+  end;
+
+
 
 end;
 
