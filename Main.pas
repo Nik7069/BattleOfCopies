@@ -40,6 +40,8 @@ type
     PaintVote2: TPaintBox;
     btnEndVote: TButton;
     fpVoteUsers: TFlowPanel;
+    fpPaintVote1: TFlowPanel;
+    fpPaintVote2: TFlowPanel;
     procedure PaintBox1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure PaintBox1MouseDown(Sender: TObject; Button: TMouseButton;
@@ -59,6 +61,8 @@ type
     procedure btnEndVoteClick(Sender: TObject);
     procedure PaintVote1Paint(Sender: TObject);
     procedure PaintVote2Paint(Sender: TObject);
+    procedure ToSelectCardClick(Sender: TObject);
+    procedure PaintVoteClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -78,6 +82,11 @@ procedure TMainForm.FormCreate(Sender: TObject);
 begin
 //  CreateBitmap;
   Randomize;
+end;
+
+procedure TMainForm.ToSelectCardClick(Sender: TObject);
+begin
+  SelectCard(Sender);
 end;
 
 procedure TMainForm.btnEndVoteClick(Sender: TObject);
@@ -139,14 +148,19 @@ begin
   LoadPaint;
 end;
 
+procedure TMainForm.PaintVoteClick(Sender: TObject);
+begin
+  PaintVoteSelect(Sender);
+end;
+
 procedure TMainForm.PaintVote1Paint(Sender: TObject);
 begin
-  LoadPaintVote1;
+  LoadPaintVote(PaintVoteList[0], BitmapVoteList[0]);
 end;
 
 procedure TMainForm.PaintVote2Paint(Sender: TObject);
 begin
-  LoadPaintVote2;
+  LoadPaintVote(PaintVoteList[1], BitmapVoteList[1]);
 end;
 
 procedure TMainForm.Timer1Timer(Sender: TObject);

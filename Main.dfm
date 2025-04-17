@@ -2,8 +2,8 @@ object MainForm: TMainForm
   Left = 0
   Top = 0
   Caption = 'MainForm'
-  ClientHeight = 504
-  ClientWidth = 645
+  ClientHeight = 507
+  ClientWidth = 626
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,8 +15,8 @@ object MainForm: TMainForm
   object pnlSetRules: TPanel
     Left = 0
     Top = 0
-    Width = 645
-    Height = 504
+    Width = 626
+    Height = 507
     Align = alClient
     BevelOuter = bvNone
     Caption = 'PanelMenu'
@@ -67,8 +67,8 @@ object MainForm: TMainForm
   object pnlWaitReady: TPanel
     Left = 0
     Top = 0
-    Width = 645
-    Height = 504
+    Width = 626
+    Height = 507
     Align = alClient
     BevelOuter = bvNone
     Caption = 'PanelWaitReady'
@@ -114,8 +114,8 @@ object MainForm: TMainForm
   object pnlGame: TPanel
     Left = 0
     Top = 0
-    Width = 645
-    Height = 504
+    Width = 626
+    Height = 507
     Align = alClient
     BevelOuter = bvNone
     Caption = 'PanelGame'
@@ -125,8 +125,8 @@ object MainForm: TMainForm
     ExplicitWidth = 639
     ExplicitHeight = 487
     DesignSize = (
-      645
-      504)
+      626
+      507)
     object PaintBox1: TPaintBox
       Left = 207
       Top = 57
@@ -164,8 +164,8 @@ object MainForm: TMainForm
       TabOrder = 2
     end
     object CustomPB: TPanel
-      Left = 122
-      Top = 450
+      Left = 113
+      Top = 452
       Width = 400
       Height = 30
       Anchors = []
@@ -202,8 +202,8 @@ object MainForm: TMainForm
   object pnlMenu: TPanel
     Left = 0
     Top = 0
-    Width = 645
-    Height = 504
+    Width = 626
+    Height = 507
     Align = alClient
     BevelOuter = bvNone
     Caption = 'PanelMenu'
@@ -224,8 +224,8 @@ object MainForm: TMainForm
   object pnlSetNames: TPanel
     Left = 0
     Top = 0
-    Width = 645
-    Height = 504
+    Width = 626
+    Height = 507
     Align = alClient
     BevelOuter = bvNone
     Caption = 'PanelSetNames'
@@ -255,24 +255,24 @@ object MainForm: TMainForm
   object pnlVote: TPanel
     Left = 0
     Top = 0
-    Width = 645
-    Height = 504
+    Width = 626
+    Height = 507
     Align = alClient
     BevelOuter = bvNone
     Caption = 'PanelVote'
     ShowCaption = False
     TabOrder = 5
     Visible = False
-    ExplicitWidth = 639
-    ExplicitHeight = 487
+    ExplicitWidth = 625
+    ExplicitHeight = 504
     object PaintVote1: TPaintBox
       Left = 59
       Top = 72
       Width = 210
       Height = 297
-      OnMouseDown = PaintBox1MouseDown
-      OnMouseMove = PaintBox1MouseMove
-      OnMouseUp = PaintBox1MouseUp
+      Color = clBtnFace
+      ParentColor = False
+      OnClick = PaintVoteClick
       OnPaint = PaintVote1Paint
     end
     object PaintVote2: TPaintBox
@@ -280,9 +280,7 @@ object MainForm: TMainForm
       Top = 72
       Width = 210
       Height = 297
-      OnMouseDown = PaintBox1MouseDown
-      OnMouseMove = PaintBox1MouseMove
-      OnMouseUp = PaintBox1MouseUp
+      OnClick = PaintVoteClick
       OnPaint = PaintVote2Paint
     end
     object txtPromptVote: TStaticText
@@ -304,11 +302,31 @@ object MainForm: TMainForm
     end
     object fpVoteUsers: TFlowPanel
       Left = 59
-      Top = 391
+      Top = 439
       Width = 512
-      Height = 98
+      Height = 50
       BevelOuter = bvNone
       TabOrder = 2
+    end
+    object fpPaintVote1: TFlowPanel
+      Left = 59
+      Top = 375
+      Width = 215
+      Height = 50
+      BevelOuter = bvNone
+      ParentBackground = False
+      ParentColor = True
+      TabOrder = 3
+    end
+    object fpPaintVote2: TFlowPanel
+      Left = 361
+      Top = 375
+      Width = 215
+      Height = 50
+      BevelOuter = bvNone
+      ParentBackground = False
+      ParentColor = True
+      TabOrder = 4
     end
   end
   object Timer1: TTimer
