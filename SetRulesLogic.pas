@@ -30,7 +30,7 @@ var
 implementation
 
 uses
-  Main, PanelsLogic, GameLogic, System.SysUtils, Vcl.Dialogs;
+  Main, PanelsLogic, VoteLogic, GameLogic, System.SysUtils, Vcl.Dialogs;
 
 var
   iName: Integer = 0;
@@ -53,7 +53,7 @@ end;
 procedure AddNewRules;
 begin
   CountPlayers := StrToInt(MainForm.ComboPlayers.Items[MainForm.ComboPlayers.ItemIndex]);
-  CountSeconds := StrToInt(MainForm.ComboSeconds.Items[MainForm.ComboSeconds.ItemIndex]) div 10;
+  CountSeconds := StrToInt(MainForm.ComboSeconds.Items[MainForm.ComboSeconds.ItemIndex]) ;
 
   if CountPlayers <= Length(PromptsList) then
   begin

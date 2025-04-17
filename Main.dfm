@@ -12,28 +12,6 @@ object MainForm: TMainForm
   Font.Style = []
   OnCreate = FormCreate
   TextHeight = 15
-  object pnlMenu: TPanel
-    Left = 0
-    Top = 0
-    Width = 645
-    Height = 504
-    Align = alClient
-    BevelOuter = bvNone
-    Caption = 'PanelMenu'
-    ShowCaption = False
-    TabOrder = 1
-    ExplicitWidth = 641
-    ExplicitHeight = 441
-    object btnStart: TButton
-      Left = 288
-      Top = 136
-      Width = 75
-      Height = 25
-      Caption = 'Start'
-      TabOrder = 0
-      OnClick = btnStartClick
-    end
-  end
   object pnlSetRules: TPanel
     Left = 0
     Top = 0
@@ -45,8 +23,8 @@ object MainForm: TMainForm
     ShowCaption = False
     TabOrder = 2
     Visible = False
-    ExplicitWidth = 641
-    ExplicitHeight = 441
+    ExplicitWidth = 639
+    ExplicitHeight = 487
     object Button3: TButton
       Left = 288
       Top = 360
@@ -86,37 +64,6 @@ object MainForm: TMainForm
         '180')
     end
   end
-  object pnlSetNames: TPanel
-    Left = 0
-    Top = 0
-    Width = 645
-    Height = 504
-    Align = alClient
-    BevelOuter = bvNone
-    Caption = 'PanelSetNames'
-    ShowCaption = False
-    TabOrder = 3
-    Visible = False
-    ExplicitWidth = 641
-    ExplicitHeight = 441
-    object Button4: TButton
-      Left = 288
-      Top = 360
-      Width = 75
-      Height = 25
-      Caption = 'Launch'
-      TabOrder = 0
-      OnClick = Button4Click
-    end
-    object NameInput: TEdit
-      Left = 264
-      Top = 200
-      Width = 121
-      Height = 23
-      TabOrder = 1
-      TextHint = #1042#1074#1077#1076#1080#1090#1077' '#1087#1089#1077#1074#1076#1086#1085#1080#1084
-    end
-  end
   object pnlWaitReady: TPanel
     Left = 0
     Top = 0
@@ -128,8 +75,8 @@ object MainForm: TMainForm
     ShowCaption = False
     TabOrder = 4
     Visible = False
-    ExplicitWidth = 641
-    ExplicitHeight = 441
+    ExplicitWidth = 639
+    ExplicitHeight = 487
     object btnReady: TButton
       Left = 288
       Top = 360
@@ -175,8 +122,8 @@ object MainForm: TMainForm
     ShowCaption = False
     TabOrder = 0
     Visible = False
-    ExplicitWidth = 641
-    ExplicitHeight = 441
+    ExplicitWidth = 639
+    ExplicitHeight = 487
     DesignSize = (
       645
       504)
@@ -218,7 +165,7 @@ object MainForm: TMainForm
     end
     object CustomPB: TPanel
       Left = 122
-      Top = 449
+      Top = 450
       Width = 400
       Height = 30
       Anchors = []
@@ -228,8 +175,8 @@ object MainForm: TMainForm
       ParentBackground = False
       ParentCtl3D = False
       TabOrder = 3
-      ExplicitLeft = 120
-      ExplicitTop = 391
+      ExplicitLeft = 119
+      ExplicitTop = 434
       object ProgressPB: TLabel
         Left = 0
         Top = 0
@@ -252,6 +199,59 @@ object MainForm: TMainForm
       end
     end
   end
+  object pnlMenu: TPanel
+    Left = 0
+    Top = 0
+    Width = 645
+    Height = 504
+    Align = alClient
+    BevelOuter = bvNone
+    Caption = 'PanelMenu'
+    ShowCaption = False
+    TabOrder = 1
+    ExplicitWidth = 639
+    ExplicitHeight = 487
+    object btnStart: TButton
+      Left = 288
+      Top = 136
+      Width = 75
+      Height = 25
+      Caption = 'Start'
+      TabOrder = 0
+      OnClick = btnStartClick
+    end
+  end
+  object pnlSetNames: TPanel
+    Left = 0
+    Top = 0
+    Width = 645
+    Height = 504
+    Align = alClient
+    BevelOuter = bvNone
+    Caption = 'PanelSetNames'
+    ShowCaption = False
+    TabOrder = 3
+    Visible = False
+    ExplicitWidth = 639
+    ExplicitHeight = 487
+    object Button4: TButton
+      Left = 288
+      Top = 360
+      Width = 75
+      Height = 25
+      Caption = 'Launch'
+      TabOrder = 0
+      OnClick = Button4Click
+    end
+    object NameInput: TEdit
+      Left = 264
+      Top = 200
+      Width = 121
+      Height = 23
+      TabOrder = 1
+      TextHint = #1042#1074#1077#1076#1080#1090#1077' '#1087#1089#1077#1074#1076#1086#1085#1080#1084
+    end
+  end
   object pnlVote: TPanel
     Left = 0
     Top = 0
@@ -263,9 +263,8 @@ object MainForm: TMainForm
     ShowCaption = False
     TabOrder = 5
     Visible = False
-    ExplicitTop = 2
-    ExplicitWidth = 609
-    ExplicitHeight = 463
+    ExplicitWidth = 639
+    ExplicitHeight = 487
     object PaintVote1: TPaintBox
       Left = 59
       Top = 72

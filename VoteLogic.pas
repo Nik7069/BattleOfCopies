@@ -28,7 +28,7 @@ var
 implementation
 
 uses
-  Main, System.Classes, PanelsLogic, Vcl.ExtCtrls, Vcl.Graphics, GameLogic;
+  Main, System.Classes,Vcl.Controls, PanelsLogic, Vcl.ExtCtrls, Vcl.Graphics, GameLogic;
 
 var
   CurrentOriginalNum: Integer;
@@ -76,6 +76,7 @@ var
 begin
 
   CurrentOriginal := PlayersList[CurrentOriginalNum];
+//  CurrentOriginal.copyid := (CurrentOriginalNum+1) mod CountPlayers;
   MainForm.txtPromptVote.Caption := CurrentOriginal.Prompt;
 
   VoteOfs := Random(LenPVL);
