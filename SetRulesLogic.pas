@@ -105,8 +105,8 @@ begin
     if iName = CountPlayers then
     begin
       iName := 0;
-//      VoteStart;
-      StartGame;
+      VoteStart;
+//      StartGame;
     end;
   end
   else

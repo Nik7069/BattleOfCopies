@@ -155,12 +155,12 @@ end;
 
 procedure TMainForm.PaintVote1Paint(Sender: TObject);
 begin
-  LoadPaintVote(PaintVoteList[0], BitmapVoteList[0]);
+  LoadPaintVote(BallotList[0].PaintVote, BallotList[0].Bitmap);
 end;
 
 procedure TMainForm.PaintVote2Paint(Sender: TObject);
 begin
-  LoadPaintVote(PaintVoteList[1], BitmapVoteList[1]);
+  LoadPaintVote(BallotList[1].PaintVote, BallotList[1].Bitmap);
 end;
 
 procedure TMainForm.Timer1Timer(Sender: TObject);
