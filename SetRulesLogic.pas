@@ -53,7 +53,7 @@ end;
 procedure AddNewRules;
 begin
   CountPlayers := StrToInt(MainForm.ComboPlayers.Items[MainForm.ComboPlayers.ItemIndex]);
-  CountSeconds := StrToInt(MainForm.ComboSeconds.Items[MainForm.ComboSeconds.ItemIndex]) ;
+  CountSeconds := StrToInt(MainForm.ComboSeconds.Items[MainForm.ComboSeconds.ItemIndex]) div 10 ;
 
   if CountPlayers <= Length(PromptsList) then
   begin
@@ -97,6 +97,7 @@ begin
     NewPlayer.Prompt := PromptsList[iName];
     NewPlayer.BitmapOrig := TBitmap.Create;
     NewPlayer.BitmapCopy := TBitmap.Create;
+    NewPlayer.Score := 0;
     PlayersList[iName] := NewPlayer;
     MainForm.NameInput.Clear;
 
@@ -105,8 +106,8 @@ begin
     if iName = CountPlayers then
     begin
       iName := 0;
-      VoteStart;
-//      StartGame;
+//      VoteStart;
+      StartGame;
     end;
   end
   else
