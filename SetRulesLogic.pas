@@ -40,7 +40,6 @@ var
   i, r: Integer;
   temp: String;
 begin
-  Randomize;
   for i := 0 to N-1 do
   begin
     r := Random(Length(SomeList)-i) + i;
@@ -53,7 +52,7 @@ end;
 procedure AddNewRules;
 begin
   CountPlayers := StrToInt(MainForm.ComboPlayers.Items[MainForm.ComboPlayers.ItemIndex]);
-  CountSeconds := StrToInt(MainForm.ComboSeconds.Items[MainForm.ComboSeconds.ItemIndex]) div 10 ;
+  CountSeconds := StrToInt(MainForm.ComboSeconds.Items[MainForm.ComboSeconds.ItemIndex]);
 
   if CountPlayers <= Length(PromptsList) then
   begin

@@ -8,7 +8,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
 
   // Мои юниты
-  GameLogic, PanelsLogic, SetRulesLogic, VoteLogic;
+  GameLogic, PanelsLogic, SetRulesLogic, VoteLogic, Vcl.ComCtrls;
 
 type
   TMainForm = class(TForm)
@@ -20,11 +20,11 @@ type
     pnlMenu: TPanel;
     btnStart: TButton;
     pnlSetRules: TPanel;
-    Button3: TButton;
+    btnSetRules: TButton;
     ComboPlayers: TComboBox;
     ComboSeconds: TComboBox;
     pnlSetNames: TPanel;
-    Button4: TButton;
+    btnSetName: TButton;
     NameInput: TEdit;
     CurrentPrompt: TStaticText;
     CustomPB: TPanel;
@@ -42,6 +42,9 @@ type
     fpVoteUsers: TFlowPanel;
     fpPaintVote1: TFlowPanel;
     fpPaintVote2: TFlowPanel;
+    lbPlayersHint: TLabel;
+    lbSecondsHint: TLabel;
+    lbPlayerNum: TLabel;
     procedure PaintBox1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure PaintBox1MouseDown(Sender: TObject; Button: TMouseButton;
@@ -53,8 +56,8 @@ type
     procedure PaintBox1Paint(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnStartClick(Sender: TObject);
-    procedure Button3Click(Sender: TObject);
-    procedure Button4Click(Sender: TObject);
+    procedure btnSetRulesClick(Sender: TObject);
+    procedure btnSetNameClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure btnReadyClick(Sender: TObject);
     procedure Timer2Timer(Sender: TObject);
@@ -79,9 +82,28 @@ uses PointConverter;
 {$R *.dfm}
 
 procedure TMainForm.FormCreate(Sender: TObject);
+var
+  i: Integer;
 begin
 //  CreateBitmap;
   Randomize;
+
+  begin
+    for i := 3 to 8 do
+      ComboPlayers.Items.Add(IntToStr(i));
+  end;
+  ComboPlayers.ItemIndex := 0;
+
+
+  begin
+    for i := 2 to 12 do
+      ComboSeconds.Items.Add(IntToStr(i*10));
+  end;
+  ComboSeconds.ItemIndex := 4;
+
+
+
+
 end;
 
 procedure TMainForm.ToSelectCardClick(Sender: TObject);
@@ -115,12 +137,12 @@ begin
   ShowPanel(pnlMenu);
 end;
 
-procedure TMainForm.Button3Click(Sender: TObject);
+procedure TMainForm.btnSetRulesClick(Sender: TObject);
 begin
   AddNewRules;
 end;
 
-procedure TMainForm.Button4Click(Sender: TObject);
+procedure TMainForm.btnSetNameClick(Sender: TObject);
 begin
   AddNewPlayer;
 end;

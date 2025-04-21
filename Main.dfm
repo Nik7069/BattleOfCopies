@@ -3,7 +3,7 @@ object MainForm: TMainForm
   Top = 0
   Caption = 'MainForm'
   ClientHeight = 507
-  ClientWidth = 626
+  ClientWidth = 629
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,62 +12,10 @@ object MainForm: TMainForm
   Font.Style = []
   OnCreate = FormCreate
   TextHeight = 15
-  object pnlSetRules: TPanel
-    Left = 0
-    Top = 0
-    Width = 626
-    Height = 507
-    Align = alClient
-    BevelOuter = bvNone
-    Caption = 'PanelMenu'
-    ShowCaption = False
-    TabOrder = 2
-    Visible = False
-    ExplicitWidth = 639
-    ExplicitHeight = 487
-    object Button3: TButton
-      Left = 288
-      Top = 360
-      Width = 75
-      Height = 25
-      Caption = 'Launch'
-      TabOrder = 0
-      OnClick = Button3Click
-    end
-    object ComboPlayers: TComboBox
-      Left = 288
-      Top = 160
-      Width = 145
-      Height = 23
-      ItemIndex = 0
-      TabOrder = 1
-      Text = '3'
-      Items.Strings = (
-        '3'
-        '4'
-        '5'
-        '6'
-        '7'
-        '8')
-    end
-    object ComboSeconds: TComboBox
-      Left = 288
-      Top = 224
-      Width = 145
-      Height = 23
-      ItemIndex = 0
-      TabOrder = 2
-      Text = '60'
-      Items.Strings = (
-        '60'
-        '120'
-        '180')
-    end
-  end
   object pnlWaitReady: TPanel
     Left = 0
     Top = 0
-    Width = 626
+    Width = 629
     Height = 507
     Align = alClient
     BevelOuter = bvNone
@@ -75,8 +23,8 @@ object MainForm: TMainForm
     ShowCaption = False
     TabOrder = 4
     Visible = False
-    ExplicitWidth = 639
-    ExplicitHeight = 487
+    ExplicitWidth = 620
+    ExplicitHeight = 490
     object btnReady: TButton
       Left = 288
       Top = 360
@@ -114,7 +62,7 @@ object MainForm: TMainForm
   object pnlGame: TPanel
     Left = 0
     Top = 0
-    Width = 626
+    Width = 629
     Height = 507
     Align = alClient
     BevelOuter = bvNone
@@ -122,10 +70,10 @@ object MainForm: TMainForm
     ShowCaption = False
     TabOrder = 0
     Visible = False
-    ExplicitWidth = 639
-    ExplicitHeight = 487
+    ExplicitWidth = 620
+    ExplicitHeight = 490
     DesignSize = (
-      626
+      629
       507)
     object PaintBox1: TPaintBox
       Left = 207
@@ -164,7 +112,7 @@ object MainForm: TMainForm
       TabOrder = 2
     end
     object CustomPB: TPanel
-      Left = 113
+      Left = 115
       Top = 452
       Width = 400
       Height = 30
@@ -175,8 +123,8 @@ object MainForm: TMainForm
       ParentBackground = False
       ParentCtl3D = False
       TabOrder = 3
-      ExplicitLeft = 119
-      ExplicitTop = 434
+      ExplicitLeft = 110
+      ExplicitTop = 436
       object ProgressPB: TLabel
         Left = 0
         Top = 0
@@ -199,63 +147,10 @@ object MainForm: TMainForm
       end
     end
   end
-  object pnlMenu: TPanel
-    Left = 0
-    Top = 0
-    Width = 626
-    Height = 507
-    Align = alClient
-    BevelOuter = bvNone
-    Caption = 'PanelMenu'
-    ShowCaption = False
-    TabOrder = 1
-    ExplicitWidth = 639
-    ExplicitHeight = 487
-    object btnStart: TButton
-      Left = 288
-      Top = 136
-      Width = 75
-      Height = 25
-      Caption = 'Start'
-      TabOrder = 0
-      OnClick = btnStartClick
-    end
-  end
-  object pnlSetNames: TPanel
-    Left = 0
-    Top = 0
-    Width = 626
-    Height = 507
-    Align = alClient
-    BevelOuter = bvNone
-    Caption = 'PanelSetNames'
-    ShowCaption = False
-    TabOrder = 3
-    Visible = False
-    ExplicitWidth = 639
-    ExplicitHeight = 487
-    object Button4: TButton
-      Left = 288
-      Top = 360
-      Width = 75
-      Height = 25
-      Caption = 'Launch'
-      TabOrder = 0
-      OnClick = Button4Click
-    end
-    object NameInput: TEdit
-      Left = 264
-      Top = 200
-      Width = 121
-      Height = 23
-      TabOrder = 1
-      TextHint = #1042#1074#1077#1076#1080#1090#1077' '#1087#1089#1077#1074#1076#1086#1085#1080#1084
-    end
-  end
   object pnlVote: TPanel
     Left = 0
     Top = 0
-    Width = 626
+    Width = 629
     Height = 507
     Align = alClient
     BevelOuter = bvNone
@@ -263,8 +158,8 @@ object MainForm: TMainForm
     ShowCaption = False
     TabOrder = 5
     Visible = False
-    ExplicitWidth = 625
-    ExplicitHeight = 504
+    ExplicitWidth = 620
+    ExplicitHeight = 490
     object PaintVote1: TPaintBox
       Left = 59
       Top = 72
@@ -327,6 +222,125 @@ object MainForm: TMainForm
       ParentBackground = False
       ParentColor = True
       TabOrder = 4
+    end
+  end
+  object pnlMenu: TPanel
+    Left = 0
+    Top = 0
+    Width = 629
+    Height = 507
+    Align = alClient
+    BevelOuter = bvNone
+    Caption = 'PanelMenu'
+    ShowCaption = False
+    TabOrder = 1
+    ExplicitWidth = 620
+    ExplicitHeight = 490
+    object btnStart: TButton
+      Left = 267
+      Top = 229
+      Width = 88
+      Height = 25
+      Caption = #1053#1072#1095#1072#1090#1100' '#1080#1075#1088#1091
+      TabOrder = 0
+      OnClick = btnStartClick
+    end
+  end
+  object pnlSetRules: TPanel
+    Left = 0
+    Top = 0
+    Width = 629
+    Height = 507
+    Align = alClient
+    BevelOuter = bvNone
+    Caption = 'PanelMenu'
+    ShowCaption = False
+    TabOrder = 2
+    Visible = False
+    ExplicitWidth = 620
+    ExplicitHeight = 490
+    object lbPlayersHint: TLabel
+      Left = 161
+      Top = 163
+      Width = 121
+      Height = 15
+      Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1080#1075#1088#1086#1082#1086#1074':'
+    end
+    object lbSecondsHint: TLabel
+      Left = 93
+      Top = 229
+      Width = 189
+      Height = 15
+      Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1089#1077#1082#1091#1085#1076' '#1085#1072' '#1088#1080#1089#1086#1074#1072#1085#1080#1077':'
+    end
+    object btnSetRules: TButton
+      Left = 240
+      Top = 312
+      Width = 115
+      Height = 25
+      Caption = #1055#1088#1080#1085#1103#1090#1100' '#1087#1088#1072#1074#1080#1083#1072
+      TabOrder = 0
+      OnClick = btnSetRulesClick
+    end
+    object ComboPlayers: TComboBox
+      Left = 288
+      Top = 160
+      Width = 78
+      Height = 23
+      TabOrder = 1
+      Text = '3'
+    end
+    object ComboSeconds: TComboBox
+      Left = 288
+      Top = 224
+      Width = 78
+      Height = 23
+      TabOrder = 2
+      Text = '60'
+    end
+  end
+  object pnlSetNames: TPanel
+    Left = 0
+    Top = 0
+    Width = 629
+    Height = 507
+    Align = alClient
+    BevelOuter = bvNone
+    Caption = 'PanelSetNames'
+    ShowCaption = False
+    TabOrder = 3
+    Visible = False
+    ExplicitWidth = 620
+    ExplicitHeight = 490
+    object lbPlayerNum: TLabel
+      Left = 48
+      Top = 57
+      Width = 65
+      Height = 48
+      Caption = '1/3'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -28
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object btnSetName: TButton
+      Left = 275
+      Top = 360
+      Width = 91
+      Height = 25
+      Caption = #1055#1088#1080#1085#1103#1090#1100' '#1080#1084#1103
+      TabOrder = 0
+      OnClick = btnSetNameClick
+    end
+    object NameInput: TEdit
+      Left = 264
+      Top = 200
+      Width = 121
+      Height = 23
+      TabOrder = 1
+      TextHint = #1042#1074#1077#1076#1080#1090#1077' '#1087#1089#1077#1074#1076#1086#1085#1080#1084
     end
   end
   object Timer1: TTimer

@@ -16,9 +16,6 @@ Coordinates=353,10,59,58
 [btnStart]
 Coordinates=160,144,60,58
 
-[Button3]
-Coordinates=121,10,59,58
-
 [pnlMenu]
 Coordinates=86,144,64,58
 
@@ -31,4 +28,7 @@ Coordinates=302,155,91,36
 [ComboPlayers]
 Coordinates=10,10,101,124
 Visible=True
+
+[btnSetRules]
+Coordinates=121,10,59,58
 
