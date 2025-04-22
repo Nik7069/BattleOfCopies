@@ -3,7 +3,7 @@
 interface
 
 uses
-  Winapi.Windows, Vcl.Graphics;
+  Winapi.Windows, Vcl.Graphics, System.SysUtils;
 
 procedure LoadPaint;
 procedure CreateBitmap;
@@ -16,7 +16,6 @@ procedure PlayerIsReady;
 procedure NextPlayerWaitReady;
 procedure CleanBitmap(var CleanThisBM: TBitmap);
 procedure AfterGame;
-procedure NextPlayerWaitPrompt3;
 procedure HidePaintBox(hide: Boolean);
 
 implementation
@@ -25,8 +24,8 @@ uses
   Main, System.Classes, SetRulesLogic, PanelsLogic, VoteLogic;
 
 
-type
-  TProcedure = procedure;
+const
+  WaitPromptTimeLength = 3000;
 
 var
   MyColor: TColor;
@@ -38,9 +37,7 @@ var
   pbTime, pbMax, pbStartTime: Integer;
   IsPaintOriginal: Boolean;
   RoundNum: Integer;
-  OnTimerFinish: TProcedure;
-
-
+  OnTimerFinish: TProc;
 
 procedure LoadPaint;
 begin
@@ -85,7 +82,7 @@ begin
   MClick := false;
 end;
 
-procedure StartTimerPB(Duration: Integer; AfterProc: TProcedure);
+procedure StartTimerPB(Duration: Integer; AfterProc: TProc);
 begin
   pbStartTime := GetTickCount;
   pbTime := Duration;
@@ -101,24 +98,42 @@ begin
   MainForm.tGame.Enabled := True;
 end;
 
+procedure NextPlayerWaitPrompt(
+  const PromptCaption, TempCaption, Hint: string;
+  AfterProc: TProc
+);
+begin
+  HidePaintBox(true);
+
+  MainForm.txtCurrentPrompt.Caption := PromptCaption;
+  MainForm.txtCurrentPromptTemp.Caption := TempCaption;
+  MainForm.txtPaintHint.Caption := Hint;
+
+  StartTimerPB(WaitPromptTimeLength, AfterProc);
+end;
+
 
 procedure NextPlayerGame;
 begin
-  if IsPaintOriginal then
-  begin
-    MainForm.txtCurrentPrompt.Caption := CurrentPlayer.Prompt;
-  end
-  else
-  begin
-    MainForm.txtCurrentPrompt.Caption := 'Нарисуйте это по памяти!';
-  end;
+//  if IsPaintOriginal then
+//  begin
+//    MainForm.txtCurrentPrompt.Caption := CurrentPlayer.Prompt;
+//  end
+//  else
+//  begin
+//    MainForm.txtCurrentPrompt.Caption := 'Нарисуйте это по памяти!';
+//  end;
 
   CleanBitmap(Bitmap);
   LoadPaint;
 
   HidePaintBox(false);
 
-  MainForm.txtPaintHint.Caption := 'Нарисуйте это!';
+  If IsPaintOriginal then
+    MainForm.txtPaintHint.Caption := 'Нарисуйте это!'
+  else
+    MainForm.txtPaintHint.Caption := '';
+
 
   StartTimerPB(CountSeconds*100, AfterGame);
 
@@ -166,9 +181,15 @@ begin
   LoadPaint;
   MainForm.pbDraw.Enabled := false;
 
-  MainForm.txtCurrentPrompt.Caption := 'Запомни этот рисунок!';
-
-  StartTimerPB(CountSeconds*100, NextPlayerWaitPrompt3);
+  StartTimerPB(CountSeconds * 100, procedure
+  begin
+    NextPlayerWaitPrompt(
+      'Нарисуйте все что запомнили',
+      'Приготовьтесь нарисовать это',
+      'Вспомните все детали!',
+      NextPlayerGame
+    );
+  end);
 end;
 
 procedure NextPlayerWaitReady;
@@ -186,43 +207,6 @@ begin
   MainForm.txtCurrentPromptTemp.Visible := hide;
 end;
 
-
-procedure NextPlayerWaitPrompt1;
-begin
-  HidePaintBox(true);
-
-  MainForm.txtCurrentPrompt.Caption := CurrentPlayer.Prompt;
-  MainForm.txtCurrentPromptTemp.Caption := CurrentPlayer.Prompt;
-  MainForm.txtPaintHint.Caption := 'Приготовьтесь рисовать по данному заданию!';
-
-  StartTimerPB(3000, NextPlayerGame);
-end;
-
-
-procedure NextPlayerWaitPrompt2;
-begin
-
-  HidePaintBox(true);
-
-  MainForm.txtCurrentPrompt.Caption := 'Запомните данный рисунок!';
-  MainForm.txtCurrentPromptTemp.Caption := 'Приготовьтесь запомнить рисунок!';
-  MainForm.txtPaintHint.Caption := 'Вам нужно будет его перерисовать!';
-
-
-  StartTimerPB(3000, NextPlayerRemember);
-end;
-
-procedure NextPlayerWaitPrompt3;
-begin
-  HidePaintBox(true);
-
-  MainForm.txtCurrentPrompt.Caption := 'Нарисуйте это!';
-  MainForm.txtCurrentPromptTemp.Caption := 'Приготовьтесь нарисовать это!';
-  MainForm.txtPaintHint.Caption := 'Вам нужно вспомнить все детали';
-
-  StartTimerPB(3000, NextPlayerGame);
-end;
-
 procedure StartGame;
 begin
   CreateBitmap;
@@ -234,15 +218,23 @@ end;
 
 procedure PlayerIsReady;
 begin
-  if not IsPaintOriginal then
+  if IsPaintOriginal then
   begin
-    NextPlayerWaitPrompt2;
-    //NextPlayerRemember;
+    NextPlayerWaitPrompt(
+      CurrentPlayer.Prompt,
+      CurrentPlayer.Prompt,
+      'Приготовьтесь это нарисовать!',
+      NextPlayerGame
+    );
   end
   else
   begin
-    NextPlayerWaitPrompt1;
-   // NextPlayerGame;
+    NextPlayerWaitPrompt(
+      'Запомните данный рисунок',
+      'Приготовьтесь запомнить рисунок',
+      'Запомните все детали!',
+      NextPlayerRemember
+    );
   end;
 
   ShowPanel(MainForm.pnlGame);
