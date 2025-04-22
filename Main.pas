@@ -52,6 +52,9 @@ type
     lbPlayerNum: TLabel;
     txtCurrentPromptTemp: TStaticText;
     txtPaintHint: TStaticText;
+    spnlSetRules: TPanel;
+    spnlSetNames: TPanel;
+    spnlWaitReady: TPanel;
     procedure pbDrawMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure pbDrawMouseDown(Sender: TObject; Button: TMouseButton;
