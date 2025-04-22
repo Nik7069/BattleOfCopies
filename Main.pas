@@ -10,13 +10,19 @@ uses
   // Мои юниты
   GameLogic, PanelsLogic, SetRulesLogic, VoteLogic, Vcl.ComCtrls;
 
+const
+  MinPlayers = 3;
+  MaxPlayers = 8;
+  MinSeconds = 20;
+  MaxSeconds = 120;
+
 type
   TMainForm = class(TForm)
-    Timer1: TTimer;
+    tGame: TTimer;
     Button1: TButton;
     Button2: TButton;
     pnlGame: TPanel;
-    PaintBox1: TPaintBox;
+    pbDraw: TPaintBox;
     pnlMenu: TPanel;
     btnStart: TButton;
     pnlSetRules: TPanel;
@@ -26,7 +32,7 @@ type
     pnlSetNames: TPanel;
     btnSetName: TButton;
     NameInput: TEdit;
-    CurrentPrompt: TStaticText;
+    txtCurrentPrompt: TStaticText;
     CustomPB: TPanel;
     ProgressPB: TLabel;
     pnlWaitReady: TPanel;
@@ -35,7 +41,6 @@ type
     txtAreReady: TStaticText;
     pnlVote: TPanel;
     txtPromptVote: TStaticText;
-    Timer2: TTimer;
     PaintVote1: TPaintBox;
     PaintVote2: TPaintBox;
     btnEndVote: TButton;
@@ -45,22 +50,23 @@ type
     lbPlayersHint: TLabel;
     lbSecondsHint: TLabel;
     lbPlayerNum: TLabel;
-    procedure PaintBox1MouseUp(Sender: TObject; Button: TMouseButton;
+    txtCurrentPromptTemp: TStaticText;
+    txtPaintHint: TStaticText;
+    procedure pbDrawMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure PaintBox1MouseDown(Sender: TObject; Button: TMouseButton;
+    procedure pbDrawMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure PaintBox1MouseMove(Sender: TObject; Shift: TShiftState;
+    procedure pbDrawMouseMove(Sender: TObject; Shift: TShiftState;
       X, Y: Integer);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
-    procedure PaintBox1Paint(Sender: TObject);
+    procedure pbDrawPaint(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnStartClick(Sender: TObject);
     procedure btnSetRulesClick(Sender: TObject);
     procedure btnSetNameClick(Sender: TObject);
-    procedure Timer1Timer(Sender: TObject);
+    procedure tGameTimer(Sender: TObject);
     procedure btnReadyClick(Sender: TObject);
-    procedure Timer2Timer(Sender: TObject);
     procedure btnEndVoteClick(Sender: TObject);
     procedure PaintVote1Paint(Sender: TObject);
     procedure PaintVote2Paint(Sender: TObject);
@@ -89,14 +95,14 @@ begin
   Randomize;
 
   begin
-    for i := 3 to 8 do
+    for i := MinPlayers to MaxPlayers do
       ComboPlayers.Items.Add(IntToStr(i));
   end;
   ComboPlayers.ItemIndex := 0;
 
 
   begin
-    for i := 2 to 12 do
+    for i := MinSeconds div 10 to MaxSeconds div 10 do
       ComboSeconds.Items.Add(IntToStr(i*10));
   end;
   ComboSeconds.ItemIndex := 4;
@@ -147,25 +153,25 @@ begin
   AddNewPlayer;
 end;
 
-procedure TMainForm.PaintBox1MouseDown(Sender: TObject; Button: TMouseButton;
+procedure TMainForm.pbDrawMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
   PaintMouseDown(X, Y);
 end;
 
-procedure TMainForm.PaintBox1MouseMove(Sender: TObject; Shift: TShiftState;
+procedure TMainForm.pbDrawMouseMove(Sender: TObject; Shift: TShiftState;
   X, Y: Integer);
 begin
   PaintMouseMove(X, Y);
 end;
 
-procedure TMainForm.PaintBox1MouseUp(Sender: TObject; Button: TMouseButton;
+procedure TMainForm.pbDrawMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
   PaintMouseUp;
 end;
 
-procedure TMainForm.PaintBox1Paint(Sender: TObject);
+procedure TMainForm.pbDrawPaint(Sender: TObject);
 begin
   LoadPaint;
 end;
@@ -185,14 +191,9 @@ begin
   LoadPaintVote(BallotList[1].PaintVote, BallotList[1].Bitmap);
 end;
 
-procedure TMainForm.Timer1Timer(Sender: TObject);
+procedure TMainForm.tGameTimer(Sender: TObject);
 begin
   GameTimer;
-end;
-
-procedure TMainForm.Timer2Timer(Sender: TObject);
-begin
-  RememberTimer;
 end;
 
 end.

@@ -1,14 +1,8 @@
-﻿[Timer1]
-Coordinates=182,1,55,36
-
-[Button1]
+﻿[Button1]
 Coordinates=190,10,59,58
 
 [pnlGame]
 Coordinates=10,144,66,58
-
-[PaintBox1]
-Coordinates=230,144,73,36
 
 [Button2]
 Coordinates=353,10,59,58
@@ -31,4 +25,10 @@ Visible=True
 
 [btnSetRules]
 Coordinates=121,10,59,58
+
+[pbDraw]
+Coordinates=230,144,73,36
+
+[tGame]
+Coordinates=182,1,55,36
 

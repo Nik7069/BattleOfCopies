@@ -33,7 +33,7 @@ uses
   Main, PanelsLogic, VoteLogic, GameLogic, System.SysUtils, Vcl.Dialogs;
 
 var
-  iName: Integer = 0;
+  iName: Integer;
 
 procedure ShuffleFirstN(var SomeList: TPromptsList; N: Integer);
 var
@@ -50,19 +50,34 @@ begin
 end;
 
 procedure AddNewRules;
+var
+  IndexPlayers: Integer;
 begin
-  CountPlayers := StrToInt(MainForm.ComboPlayers.Items[MainForm.ComboPlayers.ItemIndex]);
-  CountSeconds := StrToInt(MainForm.ComboSeconds.Items[MainForm.ComboSeconds.ItemIndex]);
+  IndexPlayers := MainForm.ComboPlayers.ItemIndex;
+  CountSeconds := StrToIntDef(MainForm.ComboSeconds.Text, -1);
 
-  if CountPlayers <= Length(PromptsList) then
+  if CountPlayers > Length(PromptsList) then
   begin
-    SetLength(PlayersList, CountPlayers);
-    ShuffleFirstN(PromptsList, CountPlayers);
-    ShowPanel(MainForm.pnlSetNames);
+    ShowMessage('Игроков больше чем уникальных заданий. Добавьте больше тем или уменьшите кол-во игроков');
+  end
+  else if IndexPlayers = -1 then
+  begin
+    ShowMessage('Вы ввели неверное количество игроков, их должно быть от ' + IntToStr(MinPlayers) + ' до ' + IntToStr(MaxPlayers));
+  end
+  else if (CountSeconds < MinSeconds) or (CountSeconds > MaxSeconds) then
+  begin
+    ShowMessage('Вы ввели неверное количество секунд, их должно быть от ' + IntToStr(MinSeconds) + ' до ' + IntToStr(MaxSeconds));
   end
   else
   begin
-    ShowMessage('Игроков больше чем уникальных заданий. Добавьте больше тем или уменьшите кол-во игроков');
+    CountPlayers := StrToInt(MainForm.ComboPlayers.Items[MainForm.ComboPlayers.ItemIndex]);
+
+    SetLength(PlayersList, CountPlayers);
+    ShuffleFirstN(PromptsList, CountPlayers);
+    MainForm.lbPlayerNum.Caption := 'Игрок № [1/' + IntToStr(CountPlayers) + ']';
+
+    iName := 0;
+    ShowPanel(MainForm.pnlSetNames);
   end;
 
 end;
@@ -100,8 +115,10 @@ begin
     PlayersList[iName] := NewPlayer;
     MainForm.NameInput.Clear;
 
-
     Inc(iName);
+
+    MainForm.lbPlayerNum.Caption := 'Игрок № [' + IntToStr(iName+1) + '/' + IntToStr(CountPlayers) + ']';
+
     if iName = CountPlayers then
     begin
       iName := 0;

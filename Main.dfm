@@ -12,141 +12,6 @@ object MainForm: TMainForm
   Font.Style = []
   OnCreate = FormCreate
   TextHeight = 15
-  object pnlWaitReady: TPanel
-    Left = 0
-    Top = 0
-    Width = 629
-    Height = 507
-    Align = alClient
-    BevelOuter = bvNone
-    Caption = 'PanelWaitReady'
-    ShowCaption = False
-    TabOrder = 4
-    Visible = False
-    ExplicitWidth = 620
-    ExplicitHeight = 490
-    object btnReady: TButton
-      Left = 288
-      Top = 360
-      Width = 75
-      Height = 25
-      Caption = 'Im ready!'
-      TabOrder = 0
-      OnClick = btnReadyClick
-    end
-    object txtReadyPlayer: TStaticText
-      Left = 75
-      Top = 134
-      Width = 504
-      Height = 49
-      Alignment = taCenter
-      AutoSize = False
-      Caption = 'Player'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -32
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 1
-    end
-    object txtAreReady: TStaticText
-      Left = 288
-      Top = 199
-      Width = 85
-      Height = 19
-      Caption = 'Are you ready?!'
-      TabOrder = 2
-    end
-  end
-  object pnlGame: TPanel
-    Left = 0
-    Top = 0
-    Width = 629
-    Height = 507
-    Align = alClient
-    BevelOuter = bvNone
-    Caption = 'PanelGame'
-    ShowCaption = False
-    TabOrder = 0
-    Visible = False
-    ExplicitWidth = 620
-    ExplicitHeight = 490
-    DesignSize = (
-      629
-      507)
-    object PaintBox1: TPaintBox
-      Left = 207
-      Top = 57
-      Width = 210
-      Height = 297
-      OnMouseDown = PaintBox1MouseDown
-      OnMouseMove = PaintBox1MouseMove
-      OnMouseUp = PaintBox1MouseUp
-      OnPaint = PaintBox1Paint
-    end
-    object Button2: TButton
-      Left = 496
-      Top = 232
-      Width = 75
-      Height = 25
-      Caption = 'Button2'
-      TabOrder = 0
-      OnClick = Button2Click
-    end
-    object Button1: TButton
-      Left = 496
-      Top = 136
-      Width = 75
-      Height = 25
-      Caption = 'Button1'
-      TabOrder = 1
-      OnClick = Button1Click
-    end
-    object CurrentPrompt: TStaticText
-      Left = 264
-      Top = 32
-      Width = 84
-      Height = 19
-      Caption = 'CurrentPrompt'
-      TabOrder = 2
-    end
-    object CustomPB: TPanel
-      Left = 115
-      Top = 452
-      Width = 400
-      Height = 30
-      Anchors = []
-      BevelOuter = bvNone
-      Color = clWhite
-      Ctl3D = True
-      ParentBackground = False
-      ParentCtl3D = False
-      TabOrder = 3
-      ExplicitLeft = 110
-      ExplicitTop = 436
-      object ProgressPB: TLabel
-        Left = 0
-        Top = 0
-        Width = 400
-        Height = 30
-        Alignment = taCenter
-        AutoSize = False
-        BiDiMode = bdRightToLeft
-        Color = clBlack
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -20
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentBiDiMode = False
-        ParentColor = False
-        ParentFont = False
-        Transparent = False
-        WordWrap = True
-      end
-    end
-  end
   object pnlVote: TPanel
     Left = 0
     Top = 0
@@ -158,7 +23,7 @@ object MainForm: TMainForm
     ShowCaption = False
     TabOrder = 5
     Visible = False
-    ExplicitWidth = 620
+    ExplicitWidth = 623
     ExplicitHeight = 490
     object PaintVote1: TPaintBox
       Left = 59
@@ -234,7 +99,7 @@ object MainForm: TMainForm
     Caption = 'PanelMenu'
     ShowCaption = False
     TabOrder = 1
-    ExplicitWidth = 620
+    ExplicitWidth = 623
     ExplicitHeight = 490
     object btnStart: TButton
       Left = 267
@@ -257,19 +122,19 @@ object MainForm: TMainForm
     ShowCaption = False
     TabOrder = 2
     Visible = False
-    ExplicitWidth = 620
+    ExplicitWidth = 623
     ExplicitHeight = 490
     object lbPlayersHint: TLabel
       Left = 161
       Top = 163
-      Width = 121
+      Width = 116
       Height = 15
       Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1080#1075#1088#1086#1082#1086#1074':'
     end
     object lbSecondsHint: TLabel
       Left = 93
       Top = 229
-      Width = 189
+      Width = 186
       Height = 15
       Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1089#1077#1082#1091#1085#1076' '#1085#1072' '#1088#1080#1089#1086#1074#1072#1085#1080#1077':'
     end
@@ -310,14 +175,16 @@ object MainForm: TMainForm
     ShowCaption = False
     TabOrder = 3
     Visible = False
-    ExplicitWidth = 620
+    ExplicitWidth = 623
     ExplicitHeight = 490
     object lbPlayerNum: TLabel
-      Left = 48
-      Top = 57
-      Width = 65
-      Height = 48
-      Caption = '1/3'
+      Left = 232
+      Top = 155
+      Width = 197
+      Height = 38
+      Alignment = taCenter
+      AutoSize = False
+      Caption = #1048#1075#1088#1086#1082' '#8470' [1/3]'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -28
@@ -326,8 +193,8 @@ object MainForm: TMainForm
       ParentFont = False
     end
     object btnSetName: TButton
-      Left = 275
-      Top = 360
+      Left = 282
+      Top = 273
       Width = 91
       Height = 25
       Caption = #1055#1088#1080#1085#1103#1090#1100' '#1080#1084#1103
@@ -335,26 +202,194 @@ object MainForm: TMainForm
       OnClick = btnSetNameClick
     end
     object NameInput: TEdit
-      Left = 264
-      Top = 200
+      Left = 267
+      Top = 224
       Width = 121
       Height = 23
       TabOrder = 1
       TextHint = #1042#1074#1077#1076#1080#1090#1077' '#1087#1089#1077#1074#1076#1086#1085#1080#1084
     end
   end
-  object Timer1: TTimer
-    Enabled = False
-    Interval = 10
-    OnTimer = Timer1Timer
-    Left = 552
-    Top = 8
+  object pnlWaitReady: TPanel
+    Left = 0
+    Top = 0
+    Width = 629
+    Height = 507
+    Align = alClient
+    BevelOuter = bvNone
+    Caption = 'PanelWaitReady'
+    ShowCaption = False
+    TabOrder = 4
+    Visible = False
+    ExplicitWidth = 623
+    ExplicitHeight = 490
+    object btnReady: TButton
+      Left = 288
+      Top = 360
+      Width = 75
+      Height = 25
+      Caption = 'Im ready!'
+      TabOrder = 0
+      OnClick = btnReadyClick
+    end
+    object txtReadyPlayer: TStaticText
+      Left = 75
+      Top = 134
+      Width = 504
+      Height = 49
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Player'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -32
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+    end
+    object txtAreReady: TStaticText
+      Left = 288
+      Top = 199
+      Width = 85
+      Height = 19
+      Caption = 'Are you ready?!'
+      TabOrder = 2
+    end
   end
-  object Timer2: TTimer
+  object pnlGame: TPanel
+    Left = 0
+    Top = 0
+    Width = 629
+    Height = 507
+    Align = alClient
+    BevelOuter = bvNone
+    Caption = 'PanelGame'
+    ShowCaption = False
+    TabOrder = 0
+    Visible = False
+    ExplicitWidth = 623
+    ExplicitHeight = 490
+    DesignSize = (
+      629
+      507)
+    object pbDraw: TPaintBox
+      Left = 207
+      Top = 57
+      Width = 210
+      Height = 297
+      OnMouseDown = pbDrawMouseDown
+      OnMouseMove = pbDrawMouseMove
+      OnMouseUp = pbDrawMouseUp
+      OnPaint = pbDrawPaint
+    end
+    object Button2: TButton
+      Left = 496
+      Top = 232
+      Width = 75
+      Height = 25
+      Caption = 'Button2'
+      TabOrder = 0
+      OnClick = Button2Click
+    end
+    object Button1: TButton
+      Left = 496
+      Top = 136
+      Width = 75
+      Height = 25
+      Caption = 'Button1'
+      TabOrder = 1
+      OnClick = Button1Click
+    end
+    object txtCurrentPrompt: TStaticText
+      Left = 207
+      Top = 24
+      Width = 210
+      Height = 19
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'CurrentPrompt'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+    end
+    object CustomPB: TPanel
+      Left = 115
+      Top = 452
+      Width = 400
+      Height = 30
+      Anchors = []
+      BevelOuter = bvNone
+      Color = clWhite
+      Ctl3D = True
+      ParentBackground = False
+      ParentCtl3D = False
+      TabOrder = 3
+      ExplicitLeft = 112
+      ExplicitTop = 436
+      object ProgressPB: TLabel
+        Left = 0
+        Top = 0
+        Width = 400
+        Height = 30
+        Alignment = taCenter
+        AutoSize = False
+        BiDiMode = bdRightToLeft
+        Color = clBlack
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -20
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentBiDiMode = False
+        ParentColor = False
+        ParentFont = False
+        Transparent = False
+        WordWrap = True
+      end
+    end
+    object txtCurrentPromptTemp: TStaticText
+      Left = 161
+      Top = 177
+      Width = 304
+      Height = 112
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'CurrentPrompt'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -28
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 4
+    end
+    object txtPaintHint: TStaticText
+      Left = 48
+      Top = 375
+      Width = 523
+      Height = 19
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Hint'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 5
+    end
+  end
+  object tGame: TTimer
     Enabled = False
     Interval = 10
-    OnTimer = Timer2Timer
-    Left = 600
+    OnTimer = tGameTimer
+    Left = 552
     Top = 8
   end
 end
