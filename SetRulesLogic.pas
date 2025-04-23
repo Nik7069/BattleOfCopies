@@ -30,7 +30,7 @@ var
 implementation
 
 uses
-  Main, PanelsLogic, VoteLogic, GameLogic, System.SysUtils, Vcl.Dialogs;
+  Main, PanelsLogic, WinLogic, VoteLogic, GameLogic, System.SysUtils, Vcl.Dialogs;
 
 var
   iName: Integer;
@@ -124,6 +124,7 @@ begin
       iName := 0;
 //      VoteStart;
       StartGame;
+//      ShowWinTable;
     end;
   end
   else
@@ -161,34 +162,6 @@ begin
     showMessage('Файл с заданиями не найден, переустановите программу');
   end;
 
-end;
-
-
-
-function GetTopPlayers(Players: TPlayersList): TPlayersList;
-var
-  MaxScore: Integer;
-  i, len: Integer;
-begin
-
-  len := Length(Players);
-
-  if len > 1 then
-
-  begin
-    MaxScore := Players[0].Score;
-
-    SetLength(Result, 1);
-    Result[i] := Players[i];
-
-    i := 1;
-    while (i < len) and (Players[i].Score = MaxScore) do
-    begin
-      SetLength(Result, i+1);
-      Result[i] := Players[i];
-      Inc(i);
-    end;
-  end;
 end;
 
 

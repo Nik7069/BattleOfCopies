@@ -8,7 +8,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
 
   // Мои юниты
-  GameLogic, PanelsLogic, SetRulesLogic, VoteLogic, Vcl.ComCtrls;
+  GameLogic, PanelsLogic, SetRulesLogic, VoteLogic, Vcl.ComCtrls, Vcl.Grids;
 
 const
   MinPlayers = 3;
@@ -55,6 +55,13 @@ type
     spnlSetRules: TPanel;
     spnlSetNames: TPanel;
     spnlWaitReady: TPanel;
+    txtOrigOrCopyPV1: TStaticText;
+    txtOrigOrCopyPV2: TStaticText;
+    pnlWinTable: TPanel;
+    fpWinTable: TFlowPanel;
+    txtEndOfGame: TStaticText;
+    spnlWinTable: TPanel;
+    txtExitToMenu: TButton;
     procedure pbDrawMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure pbDrawMouseDown(Sender: TObject; Button: TMouseButton;
@@ -70,11 +77,13 @@ type
     procedure btnSetNameClick(Sender: TObject);
     procedure tGameTimer(Sender: TObject);
     procedure btnReadyClick(Sender: TObject);
-    procedure btnEndVoteClick(Sender: TObject);
+    procedure btnShowOrigAndCopyClick(Sender: TObject);
+    procedure btnCalculatePointsClick(Sender: TObject);
     procedure PaintVote1Paint(Sender: TObject);
     procedure PaintVote2Paint(Sender: TObject);
     procedure ToSelectCardClick(Sender: TObject);
     procedure PaintVoteClick(Sender: TObject);
+    procedure txtExitToMenuClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -120,7 +129,17 @@ begin
   SelectCard(Sender);
 end;
 
-procedure TMainForm.btnEndVoteClick(Sender: TObject);
+procedure TMainForm.txtExitToMenuClick(Sender: TObject);
+begin
+  ShowPanel(MainForm.pnlMenu);
+end;
+
+procedure TMainForm.btnShowOrigAndCopyClick(Sender: TObject);
+begin
+  ShowOrigAndCopy;
+end;
+
+procedure TMainForm.btnCalculatePointsClick(Sender: TObject);
 begin
   CalculatePoints;
 end;

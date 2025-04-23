@@ -1,0 +1,136 @@
+unit WinLogic;
+
+interface
+
+uses
+  SetRulesLogic, Main, System.Classes, PanelsLogic, System.SysUtils, Vcl.Graphics, Vcl.StdCtrls;
+
+procedure ShowWinTable;
+
+implementation
+
+const
+  StandartColor = clWebSnow;
+  WinColor = clWebGold;
+
+procedure SortTopPlayers(var Players: TPlayersList);
+var
+  i, j: Integer;
+  Temp: TPlayer;
+begin
+  for i := 0 to High(Players) - 1 do
+    for j := i + 1 to High(Players) do
+      if Players[j].Score > Players[i].Score then
+      begin
+        Temp := Players[i];
+        Players[i] := Players[j];
+        Players[j] := Temp;
+      end;
+end;
+
+//function GetTopPlayers(Players: TPlayersList): TPlayersList;
+//var
+//  MaxScore: Integer;
+//  i, len: Integer;
+//begin
+//
+//  len := Length(Players);
+//
+//  if len > 1 then
+//
+//  begin
+//    MaxScore := Players[0].Score;
+//
+//    i := 0;
+//    while (i < len) and (Players[i].Score = MaxScore) do
+//    begin
+//      SetLength(Result, i+1);
+//      Result[i] := Players[i];
+//      Inc(i);
+//    end;
+//  end;
+//end;
+
+
+
+procedure ShowWinTable;
+var
+  i: Integer;
+  lblPlayer, lblScore: TLabel;
+  MaxScore: Integer;
+begin
+  ShowPanel(MainForm.pnlWinTable);
+
+  SortTopPlayers(PlayersList);
+  MaxScore := PlayersList[0].Score;
+
+
+  for i := 0 to High(PlayersList) do
+  begin
+    lblPlayer := TLabel.Create(MainForm);
+    lblScore := TLabel.Create(MainForm);
+
+    with lblPlayer do
+    begin
+      Parent := MainForm.fpWinTable;
+      Caption := PlayersList[i].Name;
+      Autosize := false;
+      Width := 330;
+      Height := 50;
+      Font.Size := 12;
+      Alignment := taCenter;
+      Layout := tlCenter;
+      Transparent := false;
+      AlignWithMargins := true;
+
+      with Margins do
+      begin
+        Top := 4;
+        Left := 4;
+        Bottom := 4;
+        Right := 4;
+      end;
+    end;
+
+
+
+    with lblScore do
+    begin
+      Parent := MainForm.fpWinTable;
+      Caption := IntToStr(PlayersList[i].Score);
+      Autosize := false;
+      Width := 100;
+      Height := 50;
+      Font.Size := 12;
+      Alignment := taCenter;
+      Layout := tlCenter;
+      Transparent := false;
+      AlignWithMargins := true;
+
+      with Margins do
+      begin
+        Top := 4;
+        Left := 4;
+        Bottom := 4;
+        Right := 4;
+      end;
+    end;
+
+    if PlayersList[i].Score = MaxScore then
+    begin
+      lblPlayer.Color := WinColor;
+      lblScore.Color := WinColor;
+    end
+    else
+    begin
+      lblPlayer.Color := StandartColor;
+      lblScore.Color := StandartColor;
+    end;
+
+  end;
+end;
+
+
+
+
+end.

@@ -20,6 +20,9 @@ begin
   MainForm.pnlSetNames.Visible := False;
   MainForm.pnlWaitReady.Visible := False;
   MainForm.pnlVote.Visible := False;
+  MainForm.pnlWinTable.Visible := False;
+
+
 
   Panel.Visible := True;
   Panel.BringToFront;

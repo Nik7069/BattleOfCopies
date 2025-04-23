@@ -14,6 +14,7 @@ procedure CalculatePoints;
 procedure LoadPaintVote(PaintVote: TPaintBox; Bitmap: TBitmap);
 procedure SelectCard(Sender: TObject);
 procedure PaintVoteSelect(Sender: TObject);
+procedure ShowOrigAndCopy;
 
 const
   UnSlctColor = clWebSnow;
@@ -35,6 +36,7 @@ type
     Bitmap: TBitmap;
     PaintVote: TPaintBox;
     Player: PPlayer;
+    OrigOrCopyText: TStaticText;
   end;
 
 
@@ -50,7 +52,7 @@ implementation
 
 uses
   Main, System.Classes, Vcl.Controls, Vcl.Dialogs, System.SysUtils,
-  PanelsLogic, GameLogic;
+  PanelsLogic, GameLogic, WinLogic;
 
 var
   OriginalNum: Integer;
@@ -106,13 +108,15 @@ procedure SelectCard(Sender: TObject);
 var
   Card: TLabel;
 begin
+  if IsVoting then
+  begin
+    if Assigned(SelectedCard) then
+      SelectedCard.Color := UnSlctColor;
 
-  if Assigned(SelectedCard) then
-    SelectedCard.Color := UnSlctColor;
-
-  Card := Sender as TLabel;
-  Card.Color := SlctColor;
-  SelectedCard := Card;
+    Card := Sender as TLabel;
+    Card.Color := SlctColor;
+    SelectedCard := Card;
+  end;
 end;
 
 procedure PaintVoteSelect(Sender: TObject);
@@ -120,7 +124,7 @@ var
   PaintVote: TPaintBox;
   i, j: Integer;
 begin
-  if Assigned(SelectedCard) then
+  if Assigned(SelectedCard) and IsVoting then
   begin
     PaintVote := Sender as TPaintBox;
 
@@ -158,6 +162,7 @@ var
   VotersCount: Integer;
   OriginalPlayer: PPlayer;
 begin
+  IsVoting := true;
 
   OriginalPlayer := @PlayersList[OriginalNum];
 //  CurrentOriginal.copyid := (OriginalNum+1) mod CountPlayers;
@@ -171,6 +176,10 @@ begin
   BallotList[VoteOfs].Bitmap.Assign(PlayersList[OriginalNum].BitmapOrig);
   BallotList[(VoteOfs+1) mod CountBallots].Bitmap.Assign(PlayersList[OriginalPlayer.copyid].BitmapCopy);
 
+  for i := Low(BallotList) to High(BallotList) do
+  begin
+    BallotList[i].OrigOrCopyText.Visible := false;
+  end;
 
   LoadPaintVote(BallotList[0].PaintVote, BallotList[0].Bitmap);
   LoadPaintVote(BallotList[1].PaintVote, BallotList[1].Bitmap);
@@ -194,8 +203,6 @@ end;
 
 procedure VoteStart;
 begin
-  IsVoting := true;
-
   CountBallots := 2;
   SetLength(BallotList, CountBallots);
 
@@ -205,9 +212,38 @@ begin
   BallotList[0].Bitmap := TBitmap.Create;
   BallotList[1].Bitmap := TBitmap.Create;
 
+  BallotList[0].OrigOrCopyText := MainForm.txtOrigOrCopyPV1;
+  BallotList[1].OrigOrCopyText := MainForm.txtOrigOrCopyPV2;
+
   OriginalNum := 0;
   ShowPanel(MainForm.pnlVote);
   NextPlayerVote;
+end;
+
+
+procedure ShowOrigAndCopy;
+var
+  i: Integer;
+begin
+  for i := Low(BallotList) to High(BallotList) do
+  begin
+    if i = VoteOfs then
+    begin
+      BallotList[i].OrigOrCopyText.Caption := 'Оригинал'
+    end
+    else
+    begin
+      BallotList[i].OrigOrCopyText.Caption := 'Копия'
+    end;
+
+    BallotList[i].OrigOrCopyText.Visible := true;
+  end;
+
+  IsVoting := false;
+
+  MainForm.btnEndVote.OnClick := MainForm.btnCalculatePointsClick;
+  MainForm.btnEndVote.Caption := 'Продолжить';
+
 end;
 
 procedure CalculatePoints;
@@ -215,6 +251,9 @@ var
   i: Integer;
   Card: TCard;
 begin
+
+  MainForm.btnEndVote.OnClick := MainForm.btnShowOrigAndCopyClick;
+  MainForm.btnEndVote.Caption := 'Закончить';
 
   for i := 0 to High(VoteCardsList) do
   begin
@@ -248,8 +287,7 @@ begin
   Inc(OriginalNum);
   if OriginalNum = CountPlayers then
   begin
-    ShowPanel(MainForm.pnlMenu);
-    IsVoting := false;
+    ShowWinTable;
   end
   else
   begin
