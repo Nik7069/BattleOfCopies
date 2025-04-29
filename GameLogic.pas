@@ -17,6 +17,10 @@ procedure NextPlayerWaitReady;
 procedure CleanBitmap(var CleanThisBM: TBitmap);
 procedure AfterGame;
 procedure HidePaintBox(hide: Boolean);
+procedure SetUndoBitmap;
+
+var
+  pbTime: Integer;
 
 implementation
 
@@ -26,18 +30,27 @@ uses
 
 const
   WaitPromptTimeLength = 3000;
+  RememberTimeLength = 5000;
+  UndoLimit = 100;
+
+type
+  TUndoBuffer = array[0..UndoLimit-1] of TBitmap;
 
 var
   MyColor: TColor;
-  Size: Integer = 8;
+  Size: Integer = 6;
   MClick: Boolean;
   Bitmap: TBitmap;
   CurrentPlayer: TPlayer;
   CurrentPlayerNum, CurrentOrigNum: Integer;
-  pbTime, pbMax, pbStartTime: Integer;
+  pbMax, pbStartTime: Integer;
   IsPaintOriginal: Boolean;
   RoundNum: Integer;
   OnTimerFinish: TProc;
+
+  UndoBuffer: TUndoBuffer;
+  UndoIndex: Integer = 0;
+  CanUndo: Boolean = false;
 
 procedure LoadPaint;
 begin
@@ -57,6 +70,51 @@ begin
   Bitmap.Canvas.Pen.Color := clBlack;
   Bitmap.Canvas.Pen.Width := Size;
 end;
+
+procedure SaveUndoBitmap;
+var
+  bmp: TBitmap;
+begin
+  if CanUndo then
+  begin
+    UndoIndex := (UndoIndex + 1) mod UndoLimit;
+    if Assigned(UndoBuffer[UndoIndex]) then
+      UndoBuffer[UndoIndex].Free;
+
+    bmp := TBitmap.Create;
+    bmp.Assign(Bitmap);
+
+    UndoBuffer[UndoIndex] := bmp;
+  end;
+
+end;
+
+
+procedure SetUndoBitmap;
+var
+  NextIndex, PrevIndex: Integer;
+begin
+  if CanUndo then
+  begin
+    PrevIndex := (UndoIndex - 1 + UndoLimit) mod UndoLimit;
+
+    if Assigned(UndoBuffer[PrevIndex]) then
+    begin
+      Bitmap.Assign(UndoBuffer[PrevIndex]);
+      LoadPaint;
+
+      NextIndex := UndoIndex;
+      if Assigned(UndoBuffer[NextIndex]) then
+      begin
+        UndoBuffer[NextIndex].Free;
+        UndoBuffer[NextIndex] := nil;
+      end;
+
+      UndoIndex := PrevIndex;
+    end;
+  end;
+end;
+
 
 procedure PaintMouseDown(X, Y: Integer);
 begin
@@ -80,6 +138,7 @@ end;
 procedure PaintMouseUp;
 begin
   MClick := false;
+  SaveUndoBitmap;
 end;
 
 procedure StartTimerPB(Duration: Integer; AfterProc: TProc);
@@ -115,14 +174,6 @@ end;
 
 procedure NextPlayerGame;
 begin
-//  if IsPaintOriginal then
-//  begin
-//    MainForm.txtCurrentPrompt.Caption := CurrentPlayer.Prompt;
-//  end
-//  else
-//  begin
-//    MainForm.txtCurrentPrompt.Caption := 'Нарисуйте это по памяти!';
-//  end;
 
   CleanBitmap(Bitmap);
   LoadPaint;
@@ -130,12 +181,18 @@ begin
   HidePaintBox(false);
 
   If IsPaintOriginal then
-    MainForm.txtPaintHint.Caption := 'Нарисуйте это!'
+  begin
+    MainForm.txtPaintHint.Caption := 'Нарисуйте это!';
+  end
   else
+  begin
     MainForm.txtPaintHint.Caption := '';
+  end;
 
+  CanUndo := true;
+  SaveUndoBitmap;
 
-  StartTimerPB(CountSeconds*100, AfterGame);
+  StartTimerPB(CountSeconds*1000, AfterGame);
 
 end;
 
@@ -149,6 +206,8 @@ begin
   begin
     CurrentPlayer.BitmapCopy.Assign(Bitmap);
   end;
+
+  CanUndo := false;
 
   Inc(CurrentPlayerNum);
   if CurrentPlayerNum = CountPlayers then
@@ -173,6 +232,8 @@ procedure NextPlayerRemember;
 begin
 
   HidePaintBox(false);
+  MainForm.btnBack.Visible := false;
+  MainForm.btnFinish.Visible := false;
 
   CurrentOrigNum := (CurrentPlayerNum+1) mod CountPlayers;
   PlayersList[CurrentOrigNum].copyid := CurrentPlayerNum;
@@ -181,7 +242,7 @@ begin
   LoadPaint;
   MainForm.pbDraw.Enabled := false;
 
-  StartTimerPB(CountSeconds * 100, procedure
+  StartTimerPB(RememberTimeLength, procedure
   begin
     NextPlayerWaitPrompt(
       'Нарисуйте все что запомнили',
@@ -205,6 +266,9 @@ begin
   MainForm.txtCurrentPrompt.Visible := not hide;
   MainForm.pbDraw.Visible := not hide;
   MainForm.txtCurrentPromptTemp.Visible := hide;
+
+  MainForm.btnBack.Visible := not hide;
+  MainForm.btnFinish.Visible := not hide;
 end;
 
 procedure StartGame;

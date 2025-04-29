@@ -13,14 +13,14 @@ uses
 const
   MinPlayers = 3;
   MaxPlayers = 8;
-  MinSeconds = 20;
+  MinSeconds = 10;
   MaxSeconds = 120;
 
 type
   TMainForm = class(TForm)
     tGame: TTimer;
-    Button1: TButton;
-    Button2: TButton;
+    btnBack: TButton;
+    btnFinish: TButton;
     pnlGame: TPanel;
     pbDraw: TPaintBox;
     pnlMenu: TPanel;
@@ -68,8 +68,8 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure pbDrawMouseMove(Sender: TObject; Shift: TShiftState;
       X, Y: Integer);
-    procedure Button1Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
+    procedure btnBackClick(Sender: TObject);
+    procedure btnFinishClick(Sender: TObject);
     procedure pbDrawPaint(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnStartClick(Sender: TObject);
@@ -84,6 +84,7 @@ type
     procedure ToSelectCardClick(Sender: TObject);
     procedure PaintVoteClick(Sender: TObject);
     procedure txtExitToMenuClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -124,6 +125,15 @@ begin
 
 end;
 
+procedure TMainForm.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (Key = Ord('Z')) and (ssCtrl in Shift) then
+  begin
+    SetUndoBitmap;
+  end;
+end;
+
 procedure TMainForm.ToSelectCardClick(Sender: TObject);
 begin
   SelectCard(Sender);
@@ -152,17 +162,16 @@ end;
 procedure TMainForm.btnStartClick(Sender: TObject);
 begin
   LoadPrompts;
-  ShowPanel(pnlSetRules);
 end;
 
-procedure TMainForm.Button1Click(Sender: TObject);
+procedure TMainForm.btnBackClick(Sender: TObject);
 begin
-  ShowPanel(pnlGame);
+  SetUndoBitmap;
 end;
 
-procedure TMainForm.Button2Click(Sender: TObject);
+procedure TMainForm.btnFinishClick(Sender: TObject);
 begin
-  ShowPanel(pnlMenu);
+  pbTime := -1;
 end;
 
 procedure TMainForm.btnSetRulesClick(Sender: TObject);

@@ -158,6 +158,7 @@ begin
 
     end;
     closeFile(myFile);
+    ShowPanel(MainForm.pnlSetRules);
   except
     showMessage('Файл с заданиями не найден, переустановите программу');
   end;

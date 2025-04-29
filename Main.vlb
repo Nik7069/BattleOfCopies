@@ -1,11 +1,5 @@
-﻿[Button1]
-Coordinates=190,10,59,58
-
-[pnlGame]
+﻿[pnlGame]
 Coordinates=10,144,66,58
-
-[Button2]
-Coordinates=353,10,59,58
 
 [btnStart]
 Coordinates=160,144,60,58
@@ -31,4 +25,10 @@ Coordinates=230,144,73,36
 
 [tGame]
 Coordinates=182,1,55,36
+
+[btnBack]
+Coordinates=190,10,59,58
+
+[btnFinish]
+Coordinates=353,10,59,58
 
