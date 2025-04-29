@@ -13,18 +13,18 @@ const
   StandartColor = clWebSnow;
   WinColor = clWebGold;
 
-procedure SortTopPlayers(var Players: TPlayersList);
+procedure SortTopPlayers;
 var
   i, j: Integer;
   Temp: TPlayer;
 begin
-  for i := 0 to High(Players) - 1 do
-    for j := i + 1 to High(Players) do
-      if Players[j].Score > Players[i].Score then
+  for i := 0 to High(PlayersList) - 1 do
+    for j := i + 1 to High(PlayersList) do
+      if PlayersList[j].Score > PlayersList[i].Score then
       begin
-        Temp := Players[i];
-        Players[i] := Players[j];
-        Players[j] := Temp;
+        Temp := PlayersList[i];
+        PlayersList[i] := PlayersList[j];
+        PlayersList[j] := Temp;
       end;
 end;
 
@@ -51,6 +51,23 @@ end;
 //  end;
 //end;
 
+procedure FreePlayersList;
+var
+  i: Integer;
+begin
+  for i := 0 to High(PlayersList) do
+  begin
+    if Assigned(PlayersList[i].BitmapOrig) then
+      PlayersList[i].BitmapOrig.Free;
+    if Assigned(PlayersList[i].BitmapCopy) then
+      PlayersList[i].BitmapCopy.Free;
+  end;
+
+  SetLength(PlayersList, 0); // очищаем сам массив
+  CountPlayers := 0;
+end;
+
+
 
 
 procedure ShowWinTable;
@@ -59,9 +76,14 @@ var
   lblPlayer, lblScore: TLabel;
   MaxScore: Integer;
 begin
+
+  for i := MainForm.fpWinTable.ControlCount - 1 downto 0 do
+    if MainForm.fpWinTable.Controls[i] is TLabel then
+      MainForm.fpWinTable.Controls[i].Free;
+
   ShowPanel(MainForm.pnlWinTable);
 
-  SortTopPlayers(PlayersList);
+  SortTopPlayers;
   MaxScore := PlayersList[0].Score;
 
 
@@ -128,6 +150,9 @@ begin
     end;
 
   end;
+
+  FreePlayersList;
+
 end;
 
 

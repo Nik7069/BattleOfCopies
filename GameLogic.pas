@@ -29,8 +29,8 @@ uses
 
 
 const
-  WaitPromptTimeLength = 3000;
-  RememberTimeLength = 5000;
+  WaitPromptTimeLength = 30;
+  RememberTimeLength = 50;
   UndoLimit = 100;
 
 type
@@ -159,8 +159,7 @@ end;
 
 procedure NextPlayerWaitPrompt(
   const PromptCaption, TempCaption, Hint: string;
-  AfterProc: TProc
-);
+  AfterProc: TProc);
 begin
   HidePaintBox(true);
 
