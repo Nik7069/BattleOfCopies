@@ -29,8 +29,8 @@ uses
 
 
 const
-  WaitPromptTimeLength = 30;
-  RememberTimeLength = 50;
+  WaitPromptTimeLength = 3000;
+  RememberTimeLength = 5000;
   UndoLimit = 100;
 
 type

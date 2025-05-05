@@ -118,7 +118,7 @@ begin
     for i := MinSeconds div 10 to MaxSeconds div 10 do
       ComboSeconds.Items.Add(IntToStr(i*10));
   end;
-  ComboSeconds.ItemIndex := 4;
+  ComboSeconds.ItemIndex := 5;
 
 
 
