@@ -2,10 +2,6 @@
 
 interface
 
-//uses
-  //Winapi.Windows, Vcl.Graphics;
-
-
 uses
   Vcl.StdCtrls, SetRulesLogic, Vcl.Graphics, Vcl.ExtCtrls;
 

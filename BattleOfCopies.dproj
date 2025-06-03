@@ -128,7 +128,6 @@
             <Form>MainForm</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="PointConverter.pas"/>
         <DCCReference Include="GameLogic.pas"/>
         <DCCReference Include="PanelsLogic.pas"/>
         <DCCReference Include="SetRulesLogic.pas"/>

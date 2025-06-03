@@ -3,7 +3,6 @@ program BattleOfCopies;
 uses
   Vcl.Forms,
   Main in 'Main.pas' {MainForm},
-  PointConverter in 'PointConverter.pas',
   GameLogic in 'GameLogic.pas',
   PanelsLogic in 'PanelsLogic.pas',
   SetRulesLogic in 'SetRulesLogic.pas',
