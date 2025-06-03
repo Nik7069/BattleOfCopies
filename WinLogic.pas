@@ -3,11 +3,14 @@ unit WinLogic;
 interface
 
 uses
-  SetRulesLogic, Main, System.Classes, PanelsLogic, System.SysUtils, Vcl.Graphics, Vcl.StdCtrls;
+  SetRulesLogic, System.Classes, PanelsLogic, System.SysUtils, Vcl.Graphics, Vcl.StdCtrls;
 
 procedure ShowWinTable;
+procedure FreePlayersList;
 
 implementation
+
+uses Main;
 
 const
   StandartColor = clWebSnow;

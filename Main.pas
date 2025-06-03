@@ -6,9 +6,10 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
+  Vcl.ComCtrls, Vcl.Grids,
 
   // Мои юниты
-  GameLogic, PanelsLogic, SetRulesLogic, VoteLogic, Vcl.ComCtrls, Vcl.Grids;
+  GameLogic, PanelsLogic, SetRulesLogic, WinLogic, VoteLogic;
 
 const
   MinPlayers = 3;
@@ -62,6 +63,7 @@ type
     txtEndOfGame: TStaticText;
     spnlWinTable: TPanel;
     txtExitToMenu: TButton;
+    btnExit: TButton;
     procedure pbDrawMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure pbDrawMouseDown(Sender: TObject; Button: TMouseButton;
@@ -85,6 +87,7 @@ type
     procedure PaintVoteClick(Sender: TObject);
     procedure txtExitToMenuClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure btnExitClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -152,6 +155,12 @@ end;
 procedure TMainForm.btnCalculatePointsClick(Sender: TObject);
 begin
   CalculatePoints;
+end;
+
+procedure TMainForm.btnExitClick(Sender: TObject);
+begin
+  FreePlayersList;
+  Close;
 end;
 
 procedure TMainForm.btnReadyClick(Sender: TObject);
