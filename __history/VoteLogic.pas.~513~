@@ -1,0 +1,299 @@
+﻿unit VoteLogic;
+
+interface
+
+//uses
+  //Winapi.Windows, Vcl.Graphics;
+
+
+uses
+  Vcl.StdCtrls, SetRulesLogic, Vcl.Graphics, Vcl.ExtCtrls;
+
+procedure VoteStart;
+procedure CalculatePoints;
+procedure LoadPaintVote(PaintVote: TPaintBox; Bitmap: TBitmap);
+procedure SelectCard(Sender: TObject);
+procedure PaintVoteSelect(Sender: TObject);
+procedure ShowOrigAndCopy;
+
+const
+  UnSlctColor = clWebSnow;
+  SlctColor = clSkyBlue;
+  GuessedOriginalScore = 200;
+  GuessedCopyScore = 100;
+
+type
+  PPlayer = ^TPlayer;
+
+  TCard = record
+    Player: PPlayer;
+    LabelCard: TLabel;
+    SelectedId: Integer;
+  end;
+
+
+  TBallot = record
+    Bitmap: TBitmap;
+    PaintVote: TPaintBox;
+    Player: PPlayer;
+    OrigOrCopyText: TStaticText;
+  end;
+
+
+  TVoteCardsList = array of TCard;
+
+var
+  IsVoting: boolean = false;
+  VoteCardsList: TVoteCardsList;
+  SelectedCard: TLabel;
+  BallotList: array of TBallot;
+
+implementation
+
+uses
+  Main, System.Classes, Vcl.Controls, Vcl.Dialogs, System.SysUtils,
+  PanelsLogic, GameLogic;
+
+var
+  OriginalNum: Integer;
+  VoteOfs, CountBallots: Integer;
+
+
+procedure LoadPaintVote(PaintVote: TPaintBox; Bitmap: TBitmap);
+begin
+  PaintVote.Canvas.Draw(0, 0, Bitmap);
+end;
+
+
+procedure CreateNewCard(var Player: TPlayer; VotersCount: Integer);
+var
+  NewCard: TCard;
+begin
+  NewCard.LabelCard := TLabel.Create(MainForm);
+
+  // Label
+  with NewCard.LabelCard do
+  begin
+    Parent := MainForm.fpVoteUsers;
+    Caption := Player.Name;
+    Width := 102;
+    Height := 35;
+    Color := UnSlctColor;
+    Transparent := false;
+    Alignment := taCenter;
+    Layout := tlCenter;
+    AlignWithMargins := true;
+    OnClick := MainForm.ToSelectCardClick;
+  end;
+
+  // Margins
+  with NewCard.LabelCard.Margins do
+  begin
+    Top := 0;
+    Left := 0;
+    Bottom := 4;
+    Right := 4;
+  end;
+
+  NewCard.SelectedId := -1;
+
+  NewCard.Player := @Player;
+
+
+  VoteCardsList[VotersCount] := NewCard;
+end;
+
+
+procedure SelectCard(Sender: TObject);
+var
+  Card: TLabel;
+begin
+  if IsVoting then
+  begin
+    if Assigned(SelectedCard) then
+      SelectedCard.Color := UnSlctColor;
+
+    Card := Sender as TLabel;
+    Card.Color := SlctColor;
+    SelectedCard := Card;
+  end;
+end;
+
+procedure PaintVoteSelect(Sender: TObject);
+var
+  PaintVote: TPaintBox;
+  i, j: Integer;
+begin
+  if Assigned(SelectedCard) and IsVoting then
+  begin
+    PaintVote := Sender as TPaintBox;
+
+    i := 0;
+    while (i <= 1) and (BallotList[i].PaintVote <> PaintVote) do
+      Inc(i);
+
+    if i <= 1 then
+    begin
+      j := 0;
+      while (j <= High(VoteCardsList)) and
+      (VoteCardsList[j].LabelCard <> SelectedCard) do
+        Inc(j);
+
+      if j <= High(VoteCardsList) then
+      begin
+        VoteCardsList[j].SelectedId := i;
+        VoteCardsList[j].LabelCard.Color := UnSlctColor;
+        if i = 0 then
+
+          VoteCardsList[j].LabelCard.Parent := MainForm.fpPaintVote1
+        else
+          VoteCardsList[j].LabelCard.Parent := MainForm.fpPaintVote2;
+      end;
+    end;
+
+  end;
+end;
+
+
+
+procedure NextPlayerVote;
+var
+  i: Integer;
+  VotersCount: Integer;
+  OriginalPlayer: PPlayer;
+begin
+  IsVoting := true;
+
+  OriginalPlayer := @PlayersList[OriginalNum];
+//  CurrentOriginal.copyid := (OriginalNum+1) mod CountPlayers;
+  MainForm.txtPromptVote.Caption := OriginalPlayer.Prompt;
+
+  VoteOfs := Random(CountBallots);
+
+  BallotList[VoteOfs].Player := @PlayersList[OriginalNum];
+  BallotList[(VoteOfs+1) mod CountBallots].Player := @PlayersList[OriginalPlayer.copyid];
+
+  BallotList[VoteOfs].Bitmap.Assign(PlayersList[OriginalNum].BitmapOrig);
+  BallotList[(VoteOfs+1) mod CountBallots].Bitmap.Assign(PlayersList[OriginalPlayer.copyid].BitmapCopy);
+
+  for i := Low(BallotList) to High(BallotList) do
+  begin
+    BallotList[i].OrigOrCopyText.Visible := false;
+  end;
+
+  LoadPaintVote(BallotList[0].PaintVote, BallotList[0].Bitmap);
+  LoadPaintVote(BallotList[1].PaintVote, BallotList[1].Bitmap);
+
+  SetLength(VoteCardsList, CountPlayers - CountBallots);
+
+  VotersCount := 0;
+
+  for i := 0 to CountPlayers - 1 do
+  begin
+    if (OriginalNum <> i) and (OriginalPlayer.copyid <> i) then
+    begin
+      CreateNewCard(PlayersList[i], VotersCount);
+      Inc(VotersCount);
+    end;
+  end;
+
+
+
+end;
+
+procedure VoteStart;
+begin
+  CountBallots := 2;
+  SetLength(BallotList, CountBallots);
+
+  BallotList[0].PaintVote := MainForm.PaintVote1;
+  BallotList[1].PaintVote := MainForm.PaintVote2;
+
+  BallotList[0].Bitmap := TBitmap.Create;
+  BallotList[1].Bitmap := TBitmap.Create;
+
+  BallotList[0].OrigOrCopyText := MainForm.txtOrigOrCopyPV1;
+  BallotList[1].OrigOrCopyText := MainForm.txtOrigOrCopyPV2;
+
+  OriginalNum := 0;
+  ShowPanel(MainForm.pnlVote);
+  NextPlayerVote;
+end;
+
+
+procedure ShowOrigAndCopy;
+var
+  i: Integer;
+begin
+  for i := Low(BallotList) to High(BallotList) do
+  begin
+    if i = VoteOfs then
+    begin
+      BallotList[i].OrigOrCopyText.Caption := 'Оригинал'
+    end
+    else
+    begin
+      BallotList[i].OrigOrCopyText.Caption := 'Копия'
+    end;
+
+    BallotList[i].OrigOrCopyText.Visible := true;
+  end;
+
+  IsVoting := false;
+
+  MainForm.btnEndVote.OnClick := MainForm.btnCalculatePointsClick;
+  MainForm.btnEndVote.Caption := 'Продолжить';
+
+end;
+
+procedure CalculatePoints;
+var
+  i: Integer;
+  Card: TCard;
+begin
+
+  MainForm.btnEndVote.OnClick := MainForm.btnShowOrigAndCopyClick;
+  MainForm.btnEndVote.Caption := 'Закончить';
+
+  for i := 0 to High(VoteCardsList) do
+  begin
+    Card := VoteCardsList[i];
+    if Card.SelectedId > -1 then
+    begin
+      if Card.SelectedId = VoteOfs then
+      begin
+        Card.Player.Score := Card.Player.Score + GuessedOriginalScore;
+      end
+      else
+      begin
+        BallotList[Card.SelectedId].Player.Score := BallotList[Card.SelectedId].Player.Score + GuessedCopyScore;
+      end;
+    end;
+
+  end;
+
+  // Очищаем
+  for i := 0 to High(VoteCardsList) do
+  begin
+    if Assigned(VoteCardsList[i].LabelCard) then
+    begin
+      VoteCardsList[i].LabelCard.Free;
+      VoteCardsList[i].LabelCard := nil;
+    end;
+  end;
+
+
+
+  Inc(OriginalNum);
+  if OriginalNum = CountPlayers then
+  begin
+    ShowPanel(MainForm.pnlMenu);
+    ShowWinTable
+  end
+  else
+  begin
+    NextPlayerVote;
+  end;
+end;
+
+end.
