@@ -30,7 +30,8 @@ var
 implementation
 
 uses
-  Main, PanelsLogic, WinLogic, VoteLogic, GameLogic, System.SysUtils, Vcl.Dialogs;
+  Main, PanelsLogic, WinLogic, VoteLogic, GameLogic, System.SysUtils,
+  Vcl.Dialogs;
 
 var
   iName: Integer;
@@ -40,9 +41,9 @@ var
   i, r: Integer;
   temp: String;
 begin
-  for i := 0 to N-1 do
+  for i := 0 to N - 1 do
   begin
-    r := Random(Length(SomeList)-i) + i;
+    r := Random(Length(SomeList) - i) + i;
     temp := SomeList[i];
     SomeList[i] := SomeList[r];
     SomeList[r] := temp;
@@ -58,23 +59,28 @@ begin
 
   if CountPlayers > Length(PromptsList) then
   begin
-    ShowMessage('Игроков больше чем уникальных заданий. Добавьте больше тем или уменьшите кол-во игроков');
+    ShowMessage
+      ('Игроков больше чем уникальных заданий. Добавьте больше тем или уменьшите кол-во игроков');
   end
   else if IndexPlayers = -1 then
   begin
-    ShowMessage('Вы ввели неверное количество игроков, их должно быть от ' + IntToStr(MinPlayers) + ' до ' + IntToStr(MaxPlayers));
+    ShowMessage('Вы ввели неверное количество игроков, их должно быть от ' +
+      IntToStr(MinPlayers) + ' до ' + IntToStr(MaxPlayers));
   end
   else if (CountSeconds < MinSeconds) or (CountSeconds > MaxSeconds) then
   begin
-    ShowMessage('Вы ввели неверное количество секунд, их должно быть от ' + IntToStr(MinSeconds) + ' до ' + IntToStr(MaxSeconds));
+    ShowMessage('Вы ввели неверное количество секунд, их должно быть от ' +
+      IntToStr(MinSeconds) + ' до ' + IntToStr(MaxSeconds));
   end
   else
   begin
-    CountPlayers := StrToInt(MainForm.ComboPlayers.Items[MainForm.ComboPlayers.ItemIndex]);
+    CountPlayers := StrToInt(MainForm.ComboPlayers.Items
+      [MainForm.ComboPlayers.ItemIndex]);
 
     SetLength(PlayersList, CountPlayers);
     ShuffleFirstN(PromptsList, CountPlayers);
-    MainForm.lbPlayerNum.Caption := 'Игрок № [1/' + IntToStr(CountPlayers) + ']';
+    MainForm.lbPlayerNum.Caption := 'Игрок № [1/' +
+      IntToStr(CountPlayers) + ']';
 
     iName := 0;
     ShowPanel(MainForm.pnlSetNames);
@@ -90,11 +96,11 @@ var
 begin
   NewPlayer.Name := Trim(MainForm.NameInput.Text);
   SameName := false;
-//  for i := Low(PlayersList) to iName-1 do
-//  begin
-//    if PlayersList[i].Name = NewPlayer.Name then
-//      SameName := true;
-//  end;
+  // for i := Low(PlayersList) to iName-1 do
+  // begin
+  // if PlayersList[i].Name = NewPlayer.Name then
+  // SameName := true;
+  // end;
 
   i := Low(PlayersList);
   while (not SameName) and (i < iName) do
@@ -103,7 +109,6 @@ begin
       SameName := true;
     Inc(i);
   end;
-
 
   if (not SameName) and (NewPlayer.Name <> '') then
   begin
@@ -117,62 +122,53 @@ begin
 
     Inc(iName);
 
-    MainForm.lbPlayerNum.Caption := 'Игрок № [' + IntToStr(iName+1) + '/' + IntToStr(CountPlayers) + ']';
+    MainForm.lbPlayerNum.Caption := 'Игрок № [' + IntToStr(iName + 1) + '/' +
+      IntToStr(CountPlayers) + ']';
 
     if iName = CountPlayers then
     begin
       iName := 0;
-//      VoteStart;
+      // VoteStart;
       StartGame;
-//      ShowWinTable;
+      // ShowWinTable;
     end;
   end
   else
   begin
-    ShowMessage('Вы ввели уже используемое/некорректное имя. Введите другой псевдоним');
+    ShowMessage
+      ('Вы ввели уже используемое/некорректное имя. Введите другой псевдоним');
   end;
 
 end;
 
-
-
 procedure LoadPrompts;
 var
   myFile: TextFile;
-  prompt: String;
+  Prompt: String;
   OldLength: Integer;
 begin
 
   try
     AssignFile(myFile, 'prompts\prompts.txt');
     Reset(myFile);
-    while (not EOF(myFile)) do begin
-      Readln(myFile, prompt);
-      prompt := Trim(UTF8ToString(prompt));
-      if prompt <> '' then
+    while (not EOF(myFile)) do
+    begin
+      Readln(myFile, Prompt);
+      Prompt := Trim(UTF8ToString(Prompt));
+      if Prompt <> '' then
       begin
         OldLength := Length(PromptsList);
-        SetLength(PromptsList, OldLength+1);
-        PromptsList[OldLength] := prompt;
+        SetLength(PromptsList, OldLength + 1);
+        PromptsList[OldLength] := Prompt;
       end;
 
     end;
     closeFile(myFile);
     ShowPanel(MainForm.pnlSetRules);
   except
-    showMessage('Файл с заданиями не найден, переустановите программу');
+    ShowMessage('Файл с заданиями не найден, переустановите программу');
   end;
 
 end;
-
-
-
-
-
-
-//procedure NextStep;
-//begin
-//  ShowPanel(MainForm.pnlGame);
-//end;
 
 end.

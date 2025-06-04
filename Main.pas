@@ -107,7 +107,7 @@ procedure TMainForm.FormCreate(Sender: TObject);
 var
   i: Integer;
 begin
-//  CreateBitmap;
+  // CreateBitmap;
   Randomize;
 
   begin
@@ -116,15 +116,11 @@ begin
   end;
   ComboPlayers.ItemIndex := 0;
 
-
   begin
     for i := MinSeconds div 10 to MaxSeconds div 10 do
-      ComboSeconds.Items.Add(IntToStr(i*10));
+      ComboSeconds.Items.Add(IntToStr(i * 10));
   end;
   ComboSeconds.ItemIndex := 5;
-
-
-
 
 end;
 

@@ -3,7 +3,8 @@ unit WinLogic;
 interface
 
 uses
-  SetRulesLogic, System.Classes, PanelsLogic, System.SysUtils, Vcl.Graphics, Vcl.StdCtrls;
+  SetRulesLogic, System.Classes, PanelsLogic, System.SysUtils, Vcl.Graphics,
+  Vcl.StdCtrls;
 
 procedure ShowWinTable;
 procedure FreePlayersList;
@@ -31,28 +32,28 @@ begin
       end;
 end;
 
-//function GetTopPlayers(Players: TPlayersList): TPlayersList;
-//var
-//  MaxScore: Integer;
-//  i, len: Integer;
-//begin
+// function GetTopPlayers(Players: TPlayersList): TPlayersList;
+// var
+// MaxScore: Integer;
+// i, len: Integer;
+// begin
 //
-//  len := Length(Players);
+// len := Length(Players);
 //
-//  if len > 1 then
+// if len > 1 then
 //
-//  begin
-//    MaxScore := Players[0].Score;
+// begin
+// MaxScore := Players[0].Score;
 //
-//    i := 0;
-//    while (i < len) and (Players[i].Score = MaxScore) do
-//    begin
-//      SetLength(Result, i+1);
-//      Result[i] := Players[i];
-//      Inc(i);
-//    end;
-//  end;
-//end;
+// i := 0;
+// while (i < len) and (Players[i].Score = MaxScore) do
+// begin
+// SetLength(Result, i+1);
+// Result[i] := Players[i];
+// Inc(i);
+// end;
+// end;
+// end;
 
 procedure FreePlayersList;
 var
@@ -70,9 +71,6 @@ begin
   CountPlayers := 0;
 end;
 
-
-
-
 procedure ShowWinTable;
 var
   i: Integer;
@@ -88,7 +86,6 @@ begin
 
   SortTopPlayers;
   MaxScore := PlayersList[0].Score;
-
 
   for i := 0 to High(PlayersList) do
   begin
@@ -116,8 +113,6 @@ begin
         Right := 4;
       end;
     end;
-
-
 
     with lblScore do
     begin
@@ -157,8 +152,5 @@ begin
   FreePlayersList;
 
 end;
-
-
-
 
 end.

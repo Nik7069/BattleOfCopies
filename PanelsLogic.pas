@@ -22,8 +22,6 @@ begin
   MainForm.pnlVote.Visible := False;
   MainForm.pnlWinTable.Visible := False;
 
-
-
   Panel.Visible := True;
   Panel.BringToFront;
 end;

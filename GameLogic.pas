@@ -27,14 +27,13 @@ implementation
 uses
   Main, System.Classes, SetRulesLogic, PanelsLogic, VoteLogic;
 
-
 const
   WaitPromptTimeLength = 3000;
   RememberTimeLength = 5000;
   UndoLimit = 100;
 
 type
-  TUndoBuffer = array[0..UndoLimit-1] of TBitmap;
+  TUndoBuffer = array [0 .. UndoLimit - 1] of TBitmap;
 
 var
   MyColor: TColor;
@@ -60,7 +59,8 @@ end;
 procedure CleanBitmap(var CleanThisBM: TBitmap);
 begin
   CleanThisBM.Canvas.Brush.Color := clWhite;
-  CleanThisBM.Canvas.FillRect(Rect(0, 0, CleanThisBM.Width, CleanThisBM.Height));
+  CleanThisBM.Canvas.FillRect(Rect(0, 0, CleanThisBM.Width,
+    CleanThisBM.Height));
 end;
 
 procedure CreateBitmap;
@@ -89,7 +89,6 @@ begin
 
 end;
 
-
 procedure SetUndoBitmap;
 var
   NextIndex, PrevIndex: Integer;
@@ -114,7 +113,6 @@ begin
     end;
   end;
 end;
-
 
 procedure PaintMouseDown(X, Y: Integer);
 begin
@@ -153,12 +151,11 @@ begin
 
   OnTimerFinish := AfterProc;
 
-  MainForm.tGame.Interval := 1;  // Любое значение, лучше < 50 для плавности
-  MainForm.tGame.Enabled := True;
+  MainForm.tGame.Interval := 1; // Любое значение, лучше < 50 для плавности
+  MainForm.tGame.Enabled := true;
 end;
 
-procedure NextPlayerWaitPrompt(
-  const PromptCaption, TempCaption, Hint: string;
+procedure NextPlayerWaitPrompt(const PromptCaption, TempCaption, Hint: string;
   AfterProc: TProc);
 begin
   HidePaintBox(true);
@@ -169,7 +166,6 @@ begin
 
   StartTimerPB(WaitPromptTimeLength, AfterProc);
 end;
-
 
 procedure NextPlayerGame;
 begin
@@ -191,7 +187,7 @@ begin
   CanUndo := true;
   SaveUndoBitmap;
 
-  StartTimerPB(CountSeconds*1000, AfterGame);
+  StartTimerPB(CountSeconds * 1000, AfterGame);
 
 end;
 
@@ -234,22 +230,20 @@ begin
   MainForm.btnBack.Visible := false;
   MainForm.btnFinish.Visible := false;
 
-  CurrentOrigNum := (CurrentPlayerNum+1) mod CountPlayers;
+  CurrentOrigNum := (CurrentPlayerNum + 1) mod CountPlayers;
   PlayersList[CurrentOrigNum].copyid := CurrentPlayerNum;
 
   Bitmap.Assign(PlayersList[CurrentOrigNum].BitmapOrig);
   LoadPaint;
   MainForm.pbDraw.Enabled := false;
 
-  StartTimerPB(RememberTimeLength, procedure
-  begin
-    NextPlayerWaitPrompt(
-      'Нарисуйте все что запомнили',
-      'Приготовьтесь нарисовать это',
-      'Вспомните все детали!',
-      NextPlayerGame
-    );
-  end);
+  StartTimerPB(RememberTimeLength,
+    procedure
+    begin
+      NextPlayerWaitPrompt('Нарисуйте все что запомнили',
+        'Приготовьтесь нарисовать это', 'Вспомните все детали!',
+        NextPlayerGame);
+    end);
 end;
 
 procedure NextPlayerWaitReady;
@@ -283,43 +277,33 @@ procedure PlayerIsReady;
 begin
   if IsPaintOriginal then
   begin
-    NextPlayerWaitPrompt(
-      CurrentPlayer.Prompt,
-      CurrentPlayer.Prompt,
-      'Приготовьтесь это нарисовать!',
-      NextPlayerGame
-    );
+    NextPlayerWaitPrompt(CurrentPlayer.Prompt, CurrentPlayer.Prompt,
+      'Приготовьтесь это нарисовать!', NextPlayerGame);
   end
   else
   begin
-    NextPlayerWaitPrompt(
-      'Запомните данный рисунок',
-      'Приготовьтесь запомнить рисунок',
-      'Запомните все детали!',
-      NextPlayerRemember
-    );
+    NextPlayerWaitPrompt('Запомните данный рисунок',
+      'Приготовьтесь запомнить рисунок', 'Запомните все детали!',
+      NextPlayerRemember);
   end;
 
   ShowPanel(MainForm.pnlGame);
 end;
 
-
-
 procedure GameTimer;
-var ElapsedTime: Integer;
+var
+  ElapsedTime: Integer;
 begin
   ElapsedTime := GetTickCount - pbStartTime;
   MainForm.ProgressPB.Width := pbMax - Round(pbMax * ElapsedTime / pbTime);
 
   if ElapsedTime >= pbTime then
   begin
-    MainForm.tGame.Enabled := False;
+    MainForm.tGame.Enabled := false;
 
     if Assigned(OnTimerFinish) then
       OnTimerFinish();
   end;
 end;
-
-
 
 end.

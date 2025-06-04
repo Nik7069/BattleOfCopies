@@ -27,14 +27,12 @@ type
     SelectedId: Integer;
   end;
 
-
   TBallot = record
     Bitmap: TBitmap;
     PaintVote: TPaintBox;
     Player: PPlayer;
     OrigOrCopyText: TStaticText;
   end;
-
 
   TVoteCardsList = array of TCard;
 
@@ -54,12 +52,10 @@ var
   OriginalNum: Integer;
   VoteOfs, CountBallots: Integer;
 
-
 procedure LoadPaintVote(PaintVote: TPaintBox; Bitmap: TBitmap);
 begin
   PaintVote.Canvas.Draw(0, 0, Bitmap);
 end;
-
 
 procedure CreateNewCard(var Player: TPlayer; VotersCount: Integer);
 var
@@ -95,10 +91,8 @@ begin
 
   NewCard.Player := @Player;
 
-
   VoteCardsList[VotersCount] := NewCard;
 end;
-
 
 procedure SelectCard(Sender: TObject);
 var
@@ -132,7 +126,7 @@ begin
     begin
       j := 0;
       while (j <= High(VoteCardsList)) and
-      (VoteCardsList[j].LabelCard <> SelectedCard) do
+        (VoteCardsList[j].LabelCard <> SelectedCard) do
         Inc(j);
 
       if j <= High(VoteCardsList) then
@@ -150,8 +144,6 @@ begin
   end;
 end;
 
-
-
 procedure NextPlayerVote;
 var
   i: Integer;
@@ -161,16 +153,18 @@ begin
   IsVoting := true;
 
   OriginalPlayer := @PlayersList[OriginalNum];
-//  CurrentOriginal.copyid := (OriginalNum+1) mod CountPlayers;
+  // CurrentOriginal.copyid := (OriginalNum+1) mod CountPlayers;
   MainForm.txtPromptVote.Caption := OriginalPlayer.Prompt;
 
   VoteOfs := Random(CountBallots);
 
   BallotList[VoteOfs].Player := @PlayersList[OriginalNum];
-  BallotList[(VoteOfs+1) mod CountBallots].Player := @PlayersList[OriginalPlayer.copyid];
+  BallotList[(VoteOfs + 1) mod CountBallots].Player :=
+    @PlayersList[OriginalPlayer.copyid];
 
   BallotList[VoteOfs].Bitmap.Assign(PlayersList[OriginalNum].BitmapOrig);
-  BallotList[(VoteOfs+1) mod CountBallots].Bitmap.Assign(PlayersList[OriginalPlayer.copyid].BitmapCopy);
+  BallotList[(VoteOfs + 1) mod CountBallots].Bitmap.Assign
+    (PlayersList[OriginalPlayer.copyid].BitmapCopy);
 
   for i := Low(BallotList) to High(BallotList) do
   begin
@@ -193,8 +187,6 @@ begin
     end;
   end;
 
-
-
 end;
 
 procedure VoteStart;
@@ -215,7 +207,6 @@ begin
   ShowPanel(MainForm.pnlVote);
   NextPlayerVote;
 end;
-
 
 procedure ShowOrigAndCopy;
 var
@@ -262,7 +253,8 @@ begin
       end
       else
       begin
-        BallotList[Card.SelectedId].Player.Score := BallotList[Card.SelectedId].Player.Score + GuessedCopyScore;
+        BallotList[Card.SelectedId].Player.Score := BallotList[Card.SelectedId]
+          .Player.Score + GuessedCopyScore;
       end;
     end;
 
@@ -277,8 +269,6 @@ begin
       VoteCardsList[i].LabelCard := nil;
     end;
   end;
-
-
 
   Inc(OriginalNum);
   if OriginalNum = CountPlayers then
